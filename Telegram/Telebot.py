@@ -48,8 +48,7 @@ def text_message(message):
                  InputMediaPhoto(pic2, caption="British Shorthair Cat")]
         bot.send_media_group(message.chat.id, media)
     else:
-        bot.send_message(
-            message.from_user.id, 'Sorry, {0.first_name}... I dont understand you. Enter the /help command, please')
+        bot.send_message(message.chat.id, 'Sorry, {0.first_name}... I dont understand you. Enter the /help command, please')
 
 
 @bot.message_handler(content_types=['photo'])
