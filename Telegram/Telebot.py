@@ -1,6 +1,7 @@
 import telebot
 from telebot import *
 from telebot.types import InputMediaPhoto
+import predict.py
 bot = telebot.TeleBot('1216215465:AAFciPgQ-NSXY5e3N32PErhTeuDui91o1C0')
 
 
@@ -54,7 +55,7 @@ def text_message(message):
 
 @bot.message_handler(content_types=['photo'])
 def photo_message(message):
-    bot.send_message(message.chat.id, 'Wow, nice photo!')
+    bot.send_message(message.chat.id, 'Wow, nice photo!' value)
 
 
 bot.polling(none_stop=True)
