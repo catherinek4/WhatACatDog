@@ -8,7 +8,7 @@ import tensorflow
 from tensorflow.keras.preprocessing import image
 import matplotlib.pyplot as plt
 import numpy as np
-img1 = image.load_img('br.jpg', target_size=(64, 64))
+img1 = image.load_img('image/br.jpg', target_size=(64, 64))
 img = image.img_to_array(img1)
 img = img/255
 # create a batch of size 1 [N,H,W,C]
