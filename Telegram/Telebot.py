@@ -107,11 +107,11 @@ def handle(message):
         prediction_breed3 = arr2[np.argmax(arr3)]
 
         if prediction_breed == 0.0:
-            prediction_breed = 0.0001
+            prediction_breed = 0.01
         if prediction_breed2 == 0.0:
-            prediction_breed2 = 0.0001
+            prediction_breed2 = 0.01
         if prediction_breed3 == 0.0:
-            prediction_breed3 = 0.0001
+            prediction_breed3 = 0.01
 
         bot.send_message(
             message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%\n\n3.{breed3}, the probability: {prediction_breed3*100}%')
@@ -134,11 +134,11 @@ def handle(message):
         prediction_breed3 = arr2[np.argmax(arr3)]
 
         if prediction_breed == 0.0:
-            prediction_breed = 0.0001
+            prediction_breed = 0.01
         if prediction_breed2 == 0.0:
-            prediction_breed2 = 0.0001
+            prediction_breed2 = 0.01
         if prediction_breed3 == 0.0:
-            prediction_breed3 = 0.0001
+            prediction_breed3 = 0.01
 
         bot.send_message(
             message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%\n\n3.{breed3}, the probability: {prediction_breed3*100}%')
