@@ -97,9 +97,24 @@ def handle(message):
         bot.send_message(message.chat.id, f'This is a {value}')
         bot.send_message(
             message.chat.id, f'The probability is {prediction_dog}')
-        bot.send_message(message.chat.id, f'The breed is {breed}')
+
+        arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
+        breed2 = dogs[np.argmax(arr2)]
+        prediction_breed2 = arr2[np.argmax(arr2)]
+
+        arr3 = np.delete(arr2, np.argmax(arr2), axis=None)
+        breed3 = dogs[np.argmax(arr3)]
+        prediction_breed3 = arr2[np.argmax(arr3)]
+
+        if prediction_breed == 0.0:
+            prediction_breed = 0.0001
+        if prediction_breed2 == 0.0:
+            prediction_breed2 = 0.0001
+        if prediction_breed3 == 0.0:
+            prediction_breed3 = 0.0001
+
         bot.send_message(
-            message.chat.id, f'The probability is {prediction_breed}')
+            message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%\n\n3.{breed3}, the probability: {prediction_breed3*100}%')
     else:
         value = 'Cat'
         prediction_cat = 1.0-prediction[0, 0]
@@ -109,9 +124,24 @@ def handle(message):
         bot.send_message(message.chat.id, f'This is a {value}')
         bot.send_message(
             message.chat.id, f'The probability is {prediction_cat}')
-        bot.send_message(message.chat.id, f'The breed is {breed}')
+
+        arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
+        breed2 = cats[np.argmax(arr2)]
+        prediction_breed2 = arr2[np.argmax(arr2)]
+
+        arr3 = np.delete(arr2, np.argmax(arr2), axis=None)
+        breed3 = cats[np.argmax(arr3)]
+        prediction_breed3 = arr2[np.argmax(arr3)]
+
+        if prediction_breed == 0.0:
+            prediction_breed = 0.0001
+        if prediction_breed2 == 0.0:
+            prediction_breed2 = 0.0001
+        if prediction_breed3 == 0.0:
+            prediction_breed3 = 0.0001
+
         bot.send_message(
-            message.chat.id, f'The probability is {prediction_breed}')
+            message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%\n\n3.{breed3}, the probability: {prediction_breed3*100}%')
 
 
 def log_request(message):
@@ -128,7 +158,6 @@ def save_image_from_message(message):
     image_id = get_image_id_from_message(message)
     file_path = bot.get_file(image_id).file_path
     image_name = "{0}.jpg".format(image_id)
-    bot.send_message(cid, f'image_name {image_name}')
     return image_name
 
 
