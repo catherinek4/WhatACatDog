@@ -1,4 +1,4 @@
-#from src.predict import *
+
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow
@@ -103,19 +103,13 @@ def handle(message):
         breed2 = dogs[np.argmax(arr2)]
         prediction_breed2 = arr2[np.argmax(arr2)]
 
-        arr3 = np.delete(arr2, np.argmax(arr2), axis=None)
-        breed3 = dogs[np.argmax(arr3)]
-        prediction_breed3 = arr2[np.argmax(arr3)]
-
         if prediction_breed == 0.0:
             prediction_breed = 0.01
         if prediction_breed2 == 0.0:
             prediction_breed2 = 0.01
-        if prediction_breed3 == 0.0:
-            prediction_breed3 = 0.01
 
         bot.send_message(
-            message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%\n\n3.{breed3}, the probability: {prediction_breed3*100}%')
+            message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%')
     else:
         value = 'Cat'
         prediction_cat = 1.0-prediction[0, 0]
@@ -125,27 +119,17 @@ def handle(message):
         bot.send_message(message.chat.id, f'This is a {value}')
         bot.send_message(
             message.chat.id, f'The probability is {prediction_cat*100}%')
-        bot.send_message(message.chat.id, f'prediction[0]: {prediction[0]}')
-
         arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
-        bot.send_message(message.chat.id, f'arr2: {arr2}')
         breed2 = cats[np.argmax(arr2)]
         prediction_breed2 = arr2[np.argmax(arr2)]
-
-        arr3 = np.delete(arr2, np.argmax(arr2), axis=None)
-        bot.send_message(message.chat.id, f'arr3: {arr3}')
-        breed3 = cats[np.argmax(arr3)]
-        prediction_breed3 = arr2[np.argmax(arr3)]
 
         if prediction_breed == 0.0:
             prediction_breed = 0.01
         if prediction_breed2 == 0.0:
             prediction_breed2 = 0.01
-        if prediction_breed3 == 0.0:
-            prediction_breed3 = 0.01
 
         bot.send_message(
-            message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%\n\n3.{breed3}, the probability: {prediction_breed3*100}%')
+            message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%')
 
 
 def log_request(message):
@@ -168,8 +152,11 @@ def save_image_from_message(message):
 def get_image_id_from_message(message):
     return message.photo[len(message.photo)-1].file_id
 
+
 @bot.message_handler(content_types=['document', 'audio'])
 def document_message(message):
-     bot.send_message(message.from_user.id, 'Please send the image for recognition as a photo, not as a file☺️')
+    bot.send_message(message.from_user.id,
+                     'Please send the image for recognition as a photo, not as a file☺️')
+
 
 bot.polling(none_stop=True)
