@@ -1,8 +1,8 @@
 #from src.predict import *
 import numpy as np
 import matplotlib.pyplot as plt
-from tensorflow.keras.preprocessing import image
 import tensorflow
+from tensorflow.python.keras.preprocessing import image
 import telebot
 import requests
 from telebot import *
@@ -168,5 +168,8 @@ def save_image_from_message(message):
 def get_image_id_from_message(message):
     return message.photo[len(message.photo)-1].file_id
 
+@bot.message_handler(content_types=['document', 'audio'])
+def document_message(message):
+     bot.send_message(message.from_user.id, 'Please send the image for recognition as a photo, not as a file☺️')
 
 bot.polling(none_stop=True)
