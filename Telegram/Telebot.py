@@ -96,9 +96,10 @@ def handle(message):
         prediction_breed = prediction[0][np.argmax(prediction[0])]
         bot.send_message(message.chat.id, f'This is a {value}')
         bot.send_message(
-            message.chat.id, f'The probability is {prediction_dog}')
-
+            message.chat.id, f'The probability is {prediction_dog*100}%')
+  
         arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
+      
         breed2 = dogs[np.argmax(arr2)]
         prediction_breed2 = arr2[np.argmax(arr2)]
 
@@ -123,13 +124,17 @@ def handle(message):
         prediction_breed = prediction[0][np.argmax(prediction[0])]
         bot.send_message(message.chat.id, f'This is a {value}')
         bot.send_message(
-            message.chat.id, f'The probability is {prediction_cat}')
+            message.chat.id, f'The probability is {prediction_cat*100}%')
+        bot.send_message(message.chat.id, f'prediction[0]: {prediction[0]}')
+
 
         arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
+        bot.send_message(message.chat.id, f'arr2: {arr2}')
         breed2 = cats[np.argmax(arr2)]
         prediction_breed2 = arr2[np.argmax(arr2)]
 
         arr3 = np.delete(arr2, np.argmax(arr2), axis=None)
+        bot.send_message(message.chat.id, f'arr3: {arr3}')
         breed3 = cats[np.argmax(arr3)]
         prediction_breed3 = arr2[np.argmax(arr3)]
 
