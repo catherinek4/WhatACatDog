@@ -69,7 +69,11 @@ def text_message(message):
         bot.send_media_group(message.chat.id, media)
     else:
         bot.send_message(
-            message.chat.id, 'Sorry, {0.first_name}... I dont understand you. Enter the /help command, please')
+            bot.send_message(message.chat.id, 'Sorry, {0.first_name}... I dont understand you. Enter the /help command, please'.format(message.from_user, bot.get_me()))
+
+
+@bot.message_handler(content_types=['photo'])
+
 
 
 @bot.message_handler(content_types=['photo'])
