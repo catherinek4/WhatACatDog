@@ -70,7 +70,7 @@ def text_message(message):
     else:
         name = message.from_user.first_name
         bot.send_message(message.chat.id, 'Sorry, {0.first_name}... I dont understand you. Enter the /help command, please'.format(message.from_user, bot.get_me()))
-        
+
 @bot.message_handler(content_types=['photo'])
 def handle(message):
     log_request(message)
