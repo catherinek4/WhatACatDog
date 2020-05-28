@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow
-from tensorflow.keras.preprocessing import image
+from tensorflow.python.keras.preprocessing import image
 import telebot
 import requests
 from telebot import *
