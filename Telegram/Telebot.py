@@ -166,6 +166,7 @@ def get_image_id_from_message(message):
 
 @bot.message_handler(content_types=['document', 'audio'])
 def document_message(message):
-     bot.send_message(message.from_user.id,'Please send the image for recognition as a photo, not as a file☺️')
+     bot.send_message(message.from_user.id,
+     'Please send the image for recognition as a photo, not as a file☺️')
 
 bot.polling(none_stop=True)
