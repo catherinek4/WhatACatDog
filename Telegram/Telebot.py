@@ -71,11 +71,6 @@ def text_message(message):
         bot.send_message(
             bot.send_message(message.chat.id, 'Sorry, {0.first_name}... I dont understand you. Enter the /help command, please'.format(message.from_user, bot.get_me()))
 
-
-@bot.message_handler(content_types=['photo'])
-
-
-
 @bot.message_handler(content_types=['photo'])
 def handle(message):
     log_request(message)
