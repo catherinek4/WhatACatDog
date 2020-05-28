@@ -73,10 +73,6 @@ def text_message(message):
 
 
 @bot.message_handler(content_types=['photo'])
-
-
-
-@bot.message_handler(content_types=['photo'])
 def handle(message):
     log_request(message)
 
