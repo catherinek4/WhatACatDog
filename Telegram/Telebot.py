@@ -68,14 +68,17 @@ def text_message(message):
                  InputMediaPhoto(pic2, caption="British Shorthair Cat")]
         bot.send_media_group(message.chat.id, media)
     else:
+<<<<<<< HEAD
         bot.send_message(
             bot.send_message(message.chat.id, 'Sorry, {0.first_name}... I dont understand you. Enter the /help command, please'.format(message.from_user, bot.get_me()))
 
+=======
+        bot.send_message(message.chat.id, 'Sorry, {0.first_name}... I dont understand you. Enter the /help command, please'.format(message.from_user, bot.get_me()))
+>>>>>>> ff4a73cc7d8c196a22a1b93fcec7825912af39e5
 
 @bot.message_handler(content_types=['photo'])
 def handle(message):
     log_request(message)
-
     file_info = bot.get_file(message.photo[len(message.photo) - 1].file_id)
     downloaded_file = bot.download_file(file_info.file_path)
     src = './user_images/' + message.photo[1].file_id + ".jpg"
