@@ -34,7 +34,7 @@ def start_message(message):
     but3 = types.KeyboardButton('Selection🖼')
     markup.add(but1, but2, but3)
     bot.send_message(
-        message.chat.id, 'Hello, select the option you need :)', reply_markup=markup)
+        message.chat.id, 'Hello, select the option you need 🙂', reply_markup=markup)
 
 
 @bot.message_handler(commands=['help'])
@@ -62,17 +62,17 @@ def text_message(message):
                          'To start recognition, enter the /start command.')
     elif message.text == "Recognize🔎":
         bot.send_message(
-            message.from_user.id, 'Send me a picture of a cat/dog that you want to recognize :)')
+            message.from_user.id, 'Send me a picture of a cat/dog that you want to recognize 🙃')
     elif message.text == "Statistics📊":
         bot.send_message(message.from_user.id, 'tyt bydet statistika hehe')
     elif message.text == "Selection🖼":
         media = [InputMediaPhoto(pic1, caption="Siberian Cat"),
                  InputMediaPhoto(pic2, caption="British Shorthair Cat")]
         bot.send_media_group(message.chat.id, media)
-    elif message.text == "Thank you" or message.text == "thank you" or message.text == "thanks" or message.text == "good job" or message.text == "Good job" or message.text == "Thank you!":
+    elif message.text == "Thank you" or message.text == "thank you" or message.text == "thanks" or message.text == "good job" or message.text == "Good job" or message.text == "Thank you!" or message.text == "good" or message.text == "Good":
         stick = open('Telegram/stickerThanks.webp', 'rb')
         bot.send_sticker(message.chat.id, stick)
-    elif message.text == "Hello" or message.text == "Hi" or message.text == "Привет":
+    elif message.text == "Hello" or message.text == "Hi" or message.text == "Привет" or message.text == "hello"or message.text == "hi":
         stick2 = open('Telegram/stickerHello.webp', 'rb')
         bot.send_sticker(message.chat.id, stick2)
     else:
@@ -84,7 +84,6 @@ def text_message(message):
 
 @bot.message_handler(content_types=['photo'])
 def handle(message):
-
     log_request(message)
     if len(message.photo) == 1:
         bot.send_message(
@@ -110,7 +109,6 @@ def handle(message):
             prediction = classifier_dog.predict(img, batch_size=None, steps=1)
             breed = dogs[np.argmax(prediction[0])]
             prediction_breed = prediction[0][np.argmax(prediction[0])]
-
 
             bot.send_message(
                 message.chat.id, f'This is a {value} 🐕 \nThe probability is {prediction_dog*100}%')
