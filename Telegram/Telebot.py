@@ -68,14 +68,17 @@ def text_message(message):
                  InputMediaPhoto(pic2, caption="British Shorthair Cat")]
         bot.send_media_group(message.chat.id, media)
     else:
-        name = message.from_user.first_name
-        bot.send_message(message.chat.id, 'Sorry, {0.first_name}... I dont understand you. Enter the /help command, please'.format(message.from_user, bot.get_me()))
+        bot.send_message(
+            message.chat.id, 'Sorry, {0.first_name}... I dont understand you. Enter the /help command, please'.format(message.from_user, bot.get_me()))
+
 
 @bot.message_handler(content_types=['photo'])
 def handle(message):
     log_request(message)
     file_info = bot.get_file(message.photo[len(message.photo) - 1].file_id)
     downloaded_file = bot.download_file(file_info.file_path)
+    bot.send_message(
+        message.chat.id, f'message.photo[1].file_id - {str(message.photo[1].file_id)}')
     src = './user_images/' + message.photo[1].file_id + ".jpg"
     with open(src, 'wb') as new_file:
         new_file.write(downloaded_file)
@@ -92,13 +95,15 @@ def handle(message):
         prediction = classifier_dog.predict(img, batch_size=None, steps=1)
         breed = dogs[np.argmax(prediction[0])]
         prediction_breed = prediction[0][np.argmax(prediction[0])]
+
         bot.send_message(message.chat.id, f'This is a {value}')
         bot.send_message(
             message.chat.id, f'The probability is {prediction_dog*100}%')
 
         arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
+        dogs2 = np.delete(dogs, np.argmax(prediction[0]), axis=None)
 
-        breed2 = dogs[np.argmax(arr2)]
+        breed2 = dogs2[np.argmax(arr2)]
         prediction_breed2 = arr2[np.argmax(arr2)]
 
         if prediction_breed == 0.0:
@@ -118,7 +123,8 @@ def handle(message):
         bot.send_message(
             message.chat.id, f'The probability is {prediction_cat*100}%')
         arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
-        breed2 = cats[np.argmax(arr2)]
+        cats2 = np.delete(cats, np.argmax(prediction[0]), axis=None)
+        breed2 = cats2[np.argmax(arr2)]
         prediction_breed2 = arr2[np.argmax(arr2)]
 
         if prediction_breed == 0.0:
