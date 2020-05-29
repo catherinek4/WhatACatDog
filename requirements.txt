@@ -1,10 +1,6 @@
 telebot==0.0.3
 tensorflow==2.1.0
-tensorflow-gpu==2.0.0
-numpy==1.18.1
 Flask==0.10.1
 h5py==2.9.0
-imutils==0.5.3
-json5==0.8.5
 Keras==2.3.1
 requests==2.7.0
