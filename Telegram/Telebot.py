@@ -169,7 +169,7 @@ def get_image_id_from_message(message):
     return message.photo[len(message.photo)-1].file_id
 
 
-@bot.message_handler(content_types=['document', 'audio'])
+@bot.message_handler(content_types=['document', 'audio', 'video', 'sticker', 'location', 'contact'])
 def document_message(message):
     bot.send_message(message.from_user.id,
                      'Please send the image for recognition as a photo, not as a file☺️')
