@@ -13,6 +13,8 @@ import datetime
 import os
 from os import environ
 from tensorflow.keras.models import load_model
+from flask import Flask, request
+server = Flask(__name__)
 classifier = load_model('resources/dogcat_model_bak.h5')
 classifier_cat = load_model('resources/cat_model_bak.h5')
 classifier_dog = load_model('resources/dog_model_bak.h5')
@@ -173,4 +175,6 @@ def document_message(message):
                      'Please send the image for recognition as a photo, not as a file☺️')
 
 
-bot.polling(none_stop=True)
+#bot.polling(none_stop=True)
+if __name__ == "__main__":
+    server.run(host = "0.0.0.0", port = int(os.environ.get('PORT, 5000')))
