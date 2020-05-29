@@ -174,7 +174,6 @@ def document_message(message):
     bot.send_message(message.from_user.id,
                      'Please send the image for recognition as a photo, not as a file☺️')
 
-
 #bot.polling(none_stop=True)
 if __name__ == "__main__":
     server.run(host = "0.0.0.0", port = int(os.environ.get('PORT, 5000')))
