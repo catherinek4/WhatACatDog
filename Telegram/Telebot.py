@@ -14,7 +14,7 @@ import os
 from os import environ
 from tensorflow.keras.models import load_model
 from flask import Flask, request
-#server = Flask(__name__)
+server = Flask(__name__)
 classifier = load_model('resources/dogcat_model_bak.h5')
 classifier_cat = load_model('resources/cat_model_bak.h5')
 classifier_dog = load_model('resources/dog_model_bak.h5')
@@ -69,11 +69,17 @@ def text_message(message):
         media = [InputMediaPhoto(pic1, caption="Siberian Cat"),
                  InputMediaPhoto(pic2, caption="British Shorthair Cat")]
         bot.send_media_group(message.chat.id, media)
+    elif message.text == "Thank you" or message.text == "thank you" message.text == "thanks" or message.text == "good job" or message.text == "Good job" or message.text == "Thank you!" or message.text == "Спасибо":
+        stick = open('stickerThanks.webp', 'rb')
+        bot.send_sticker(message.chat.id, stick)
+    elif message.text == "Hello" or  message.text == "Hi" or message.text == "Привет":
+        stick2 = open('stickerHello.webp', 'rb')
+        bot.send_sticker(message.chat.id, stick2)
     else:
-        bot.send_message(
-            message.chat.id, 'Sorry, {0.first_name}... I dont understand you. Enter the /help command, please'.format(message.from_user, bot.get_me()))
-
-
+        stick3 = open('stickerNo.webp', 'rb')
+        bot.send_message(message.chat.id, 'Sorry, {0.first_name}... I dont understand you. Enter the /help command, please'.format(message.from_user, bot.get_me()))
+        bot.send_sticker(message.chat.id, stick3)
+        
 @bot.message_handler(content_types=['photo'])
 def handle(message):
     log_request(message)
@@ -81,8 +87,15 @@ def handle(message):
         bot.send_message(
             message.chat.id, 'Your picture is small for recognition.\nPlease send a bigger one')
     else:
+        bot.send_message(
+        message.chat.id, f'len(message.photo) =  {str(len(message.photo))}')
+        bot.send_message(
+        message.chat.id, f'message.photo[len(message.photo) - 1] - {str(message.photo[len(message.photo) - 1])}')
         file_info = bot.get_file(message.photo[len(message.photo) - 1].file_id)
         downloaded_file = bot.download_file(file_info.file_path)
+        bot.send_message(message.chat.id, f' file_info = {str(file_info)}')
+        bot.send_message(
+            message.chat.id, f'message.photo[1].file_id - {str(message.photo[1].file_id)}')
         src = './user_images/' + message.photo[1].file_id + ".jpg"
         with open(src, 'wb') as new_file:
             new_file.write(downloaded_file)
@@ -104,8 +117,7 @@ def handle(message):
             bot.send_message(
                 message.chat.id, f'The probability is {prediction_dog*100}%')
 
-            arr2 = np.delete(prediction[0], np.argmax(
-                prediction[0]), axis=None)
+            arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
             dogs2 = np.delete(dogs, np.argmax(prediction[0]), axis=None)
 
             breed2 = dogs2[np.argmax(arr2)]
@@ -127,8 +139,7 @@ def handle(message):
             bot.send_message(message.chat.id, f'This is a {value}')
             bot.send_message(
                 message.chat.id, f'The probability is {prediction_cat*100}%')
-            arr2 = np.delete(prediction[0], np.argmax(
-                prediction[0]), axis=None)
+            arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
             cats2 = np.delete(cats, np.argmax(prediction[0]), axis=None)
             breed2 = cats2[np.argmax(arr2)]
             prediction_breed2 = arr2[np.argmax(arr2)]
@@ -137,9 +148,10 @@ def handle(message):
                 prediction_breed = 0.01
             if prediction_breed2 == 0.0:
                 prediction_breed2 = 0.01
-
+                
             bot.send_message(
                 message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%')
+   
 
 
 def log_request(message):
@@ -168,7 +180,6 @@ def document_message(message):
     bot.send_message(message.from_user.id,
                      'Please send the image for recognition as a photo, not as a file☺️')
 
-
-bot.polling(none_stop=True)
-# if __name__ == "__main__":
-#  server.run(host = "0.0.0.0", port = int(os.environ.get('PORT, 5000')))
+#bot.polling(none_stop=True)
+if __name__ == "__main__":
+    server.run(host = "0.0.0.0", port = int(os.environ.get('PORT, 5000')))
