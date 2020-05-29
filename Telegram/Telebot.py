@@ -75,65 +75,75 @@ def text_message(message):
 @bot.message_handler(content_types=['photo'])
 def handle(message):
     log_request(message)
-    file_info = bot.get_file(message.photo[len(message.photo) - 1].file_id)
-    downloaded_file = bot.download_file(file_info.file_path)
-    bot.send_message(
-        message.chat.id, f'message.photo[1].file_id - {str(message.photo[1].file_id)}')
-    src = './user_images/' + message.photo[1].file_id + ".jpg"
-    with open(src, 'wb') as new_file:
-        new_file.write(downloaded_file)
-    bot.send_message(message.chat.id, '🔥 Analyzing image, be patient ! 🔥')
-    image_name = save_image_from_message(message)
-    img1 = image.load_img(src, target_size=(64, 64))
-    img = image.img_to_array(img1)
-    img = img/255
-    img = np.expand_dims(img, axis=0)
-    prediction = classifier.predict(img, batch_size=None, steps=1)
-    if(prediction[0][0] > 0.5):
-        value = 'Dog'
-        prediction_dog = prediction[0, 0]
-        prediction = classifier_dog.predict(img, batch_size=None, steps=1)
-        breed = dogs[np.argmax(prediction[0])]
-        prediction_breed = prediction[0][np.argmax(prediction[0])]
-
-        bot.send_message(message.chat.id, f'This is a {value}')
+    if len(message.photo) == 1:
         bot.send_message(
-            message.chat.id, f'The probability is {prediction_dog*100}%')
-
-        arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
-        dogs2 = np.delete(dogs, np.argmax(prediction[0]), axis=None)
-
-        breed2 = dogs2[np.argmax(arr2)]
-        prediction_breed2 = arr2[np.argmax(arr2)]
-
-        if prediction_breed == 0.0:
-            prediction_breed = 0.01
-        if prediction_breed2 == 0.0:
-            prediction_breed2 = 0.01
-
-        bot.send_message(
-            message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%')
+            message.chat.id, 'Your picture is small for recognition.\nPlease send a bigger one')
     else:
-        value = 'Cat'
-        prediction_cat = 1.0-prediction[0, 0]
-        prediction = classifier_cat.predict(img, batch_size=None, steps=1)
-        breed = cats[np.argmax(prediction[0])]
-        prediction_breed = prediction[0][np.argmax(prediction[0])]
-        bot.send_message(message.chat.id, f'This is a {value}')
         bot.send_message(
-            message.chat.id, f'The probability is {prediction_cat*100}%')
-        arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
-        cats2 = np.delete(cats, np.argmax(prediction[0]), axis=None)
-        breed2 = cats2[np.argmax(arr2)]
-        prediction_breed2 = arr2[np.argmax(arr2)]
-
-        if prediction_breed == 0.0:
-            prediction_breed = 0.01
-        if prediction_breed2 == 0.0:
-            prediction_breed2 = 0.01
-
+        message.chat.id, f'len(message.photo) =  {str(len(message.photo))}')
         bot.send_message(
-            message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%')
+        message.chat.id, f'message.photo[len(message.photo) - 1] - {str(message.photo[len(message.photo) - 1])}')
+        file_info = bot.get_file(message.photo[len(message.photo) - 1].file_id)
+        downloaded_file = bot.download_file(file_info.file_path)
+        bot.send_message(message.chat.id, f' file_info = {str(file_info)}')
+        bot.send_message(
+            message.chat.id, f'message.photo[1].file_id - {str(message.photo[1].file_id)}')
+        src = './user_images/' + message.photo[1].file_id + ".jpg"
+        with open(src, 'wb') as new_file:
+            new_file.write(downloaded_file)
+        bot.send_message(message.chat.id, '🔥 Analyzing image, be patient ! 🔥')
+        image_name = save_image_from_message(message)
+        img1 = image.load_img(src, target_size=(64, 64))
+        img = image.img_to_array(img1)
+        img = img/255
+        img = np.expand_dims(img, axis=0)
+        prediction = classifier.predict(img, batch_size=None, steps=1)
+        if(prediction[0][0] > 0.5):
+            value = 'Dog'
+            prediction_dog = prediction[0, 0]
+            prediction = classifier_dog.predict(img, batch_size=None, steps=1)
+            breed = dogs[np.argmax(prediction[0])]
+            prediction_breed = prediction[0][np.argmax(prediction[0])]
+
+            bot.send_message(message.chat.id, f'This is a {value}')
+            bot.send_message(
+                message.chat.id, f'The probability is {prediction_dog*100}%')
+
+            arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
+            dogs2 = np.delete(dogs, np.argmax(prediction[0]), axis=None)
+
+            breed2 = dogs2[np.argmax(arr2)]
+            prediction_breed2 = arr2[np.argmax(arr2)]
+
+            if prediction_breed == 0.0:
+                prediction_breed = 0.01
+            if prediction_breed2 == 0.0:
+                prediction_breed2 = 0.01
+
+            bot.send_message(
+                message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%')
+        else:
+            value = 'Cat'
+            prediction_cat = 1.0-prediction[0, 0]
+            prediction = classifier_cat.predict(img, batch_size=None, steps=1)
+            breed = cats[np.argmax(prediction[0])]
+            prediction_breed = prediction[0][np.argmax(prediction[0])]
+            bot.send_message(message.chat.id, f'This is a {value}')
+            bot.send_message(
+                message.chat.id, f'The probability is {prediction_cat*100}%')
+            arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
+            cats2 = np.delete(cats, np.argmax(prediction[0]), axis=None)
+            breed2 = cats2[np.argmax(arr2)]
+            prediction_breed2 = arr2[np.argmax(arr2)]
+
+            if prediction_breed == 0.0:
+                prediction_breed = 0.01
+            if prediction_breed2 == 0.0:
+                prediction_breed2 = 0.01
+                
+            bot.send_message(
+                message.chat.id, f'It can be:\n\n1.{breed}, the probability: {prediction_breed*100}%\n\n2.{breed2}, the probability: {prediction_breed2*100}%')
+   
 
 
 def log_request(message):
