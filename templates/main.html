@@ -7,10 +7,7 @@
 
 <body>
     <header>
-        <div id="base">
-            <h1>WhatACatDog </h1>
-        </div>
-
+        <div id="base"></div>
         <iframe src="{{ url_for('show_header') }}"></iframe>
     </header>
     <div id="scroller" class="arrow">
@@ -74,3 +71,24 @@
 </body>
 
 </html>
+<script> 
+    $(document).ready(function(){
+        // $('#scroller').fadeOut();   
+        //fade in/out based on scrollTop value
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 550) {
+                $('#scroller').fadeIn();
+            } else  {
+                $('#scroller').fadeOut();
+            }
+        });
+     
+        // scroll body to 0px on click
+        $('#scroller').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 400);
+            return false;
+        });
+    });
+</script>

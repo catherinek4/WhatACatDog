@@ -397,6 +397,7 @@ background-image: url(images/uphover.png);
 .telegram:hover {
   background-image: url(images/telegramhov.png);
 }
+
 .estrellas {
   position: fixed;
   width: 100px;
