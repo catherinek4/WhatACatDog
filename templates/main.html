@@ -17,10 +17,10 @@
     <div>
         <p id="recogn"> Recognize the breed of a cat/dog </p>
         <div id='uploading'>
-            <form>
-                <button id='btnClick' onclick="document.getElementById('getFile').click()">Click here to upload an
-                    image</button>
-                <input type='file' accept="image/jpg, image/jpeg" id="getFile" style="display:none">
+            <form action="/" method="POST" enctype="multipart/form-data">
+                <!-- <button id='btnClick' onclick="document.getElementById('getFile').click()">Click here to upload an
+                    image</button> -->
+                <input type='file' accept="image/jpg, image/jpeg" id="getFile" name="image">
                 <button id='rec'> RECOGNIZE </button>
             </form>
         </div>
