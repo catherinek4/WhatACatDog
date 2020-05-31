@@ -69,3 +69,24 @@
 </body>
 
 </html>
+<script> 
+    $(document).ready(function(){
+        // $('#scroller').fadeOut();   
+        //fade in/out based on scrollTop value
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 550) {
+                $('#scroller').fadeIn();
+            } else  {
+                $('#scroller').fadeOut();
+            }
+        });
+     
+        // scroll body to 0px on click
+        $('#scroller').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 400);
+            return false;
+        });
+    });
+</script>
