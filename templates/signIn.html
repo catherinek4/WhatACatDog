@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title> WhatACatDog </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleSigning.css') }}">
+</head>
+
+<body>
+    <div id='frmIn'>
+        <form action="#" method="post" id='formaIn'>
+            <h2 id='head2'>Sign In</h2>
+
+            <label for="Email" class="floatLabel" id='l2'>Email Address</label>
+            <br>
+            <input id="Email" name="Email" type="text" class="inp">
+            <label for="password" class="floatLabel" id='l3'>Password</label>
+            <br>
+            <input id="password" name="password" type="password" class="inp">
+            <div>
+                <input type="checkbox" id="remPas" name="rp">
+                <label for="rp" id='lbl'> Remember me</label>
+                <p id='forgot'><a href='' style="text-decoration: none;  color: #C68CDD;"> Forgot password?</a></p>
+            </div>
+            <input type="submit" value="Submit" id="submit2">
+            <p id='pep'> Or sign in using </p>
+            <ul id='api'>
+
+                <li id='ggl'><img src="{{ url_for('static', filename='css//images/u191.png') }}"
+                        style="height: 20px; width: 20px; margin-bottom: -5px;">
+                    Google </li>
+                <li id='fcb'> <img src="{{ url_for('static', filename='css//images/u193.png') }}"
+                        style="height: 20px; width: 10px;margin-bottom: -5px;">
+                    Facebook </li>
+            </ul>
+            <p id='pep3'> Don`t have an account? <a id='sign' href="{{ url_for('show_signUp') }}"> Create</a> </p>
+        </form>
+    </div>
+
+
+</body>
+
+</html>

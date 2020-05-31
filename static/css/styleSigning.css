@@ -1,0 +1,171 @@
+
+#submit{
+    border-width:0px;
+  position:absolute;
+  width:300px;
+  height:38px;
+  background-color:rgba(129, 211, 248, 0.819607843137255);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(0, 160, 228, 1);
+  border-radius:10px;
+  font-family:'Lato', sans-serif;
+  font-weight:400;
+  font-style:normal;
+  font-size:18px;
+  color:#FFFFFF;
+    margin-top: 3%;
+}
+#submit:hover{
+
+cursor: pointer;
+  background-color:rgba(186, 234, 255, 0.996078431372549);
+
+}
+#frm{
+    
+margin-left: 35%;
+    margin-top: 5%;
+  width:499px;
+  height:533px;
+  background-color:#F7F6F6;
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:#EAE5E5;
+  border-radius:30px;
+  color:#20B3F2;
+}
+.inp{
+    position:absolute;
+  width:300px;
+  height:25px;
+  padding:3px 2px 3px 2px;
+  font-weight:400;
+  font-size:13px;
+  color:black;
+  text-align:left;
+  background-color:white;
+  border:1px solid #81D3F8;
+    border-radius: 13px;
+   
+}
+
+#forma{
+    margin-left: 20%;
+}
+#password{
+    margin-top: -15px;
+}
+#Email{
+      margin-top: -15px;
+}
+#FN{
+   margin-top: -15px;
+}
+.floatLabel{
+    font-family:'Open Sans SemiBold', 'Open Sans Regular', 'Open Sans', sans-serif;
+  font-weight:600;
+    opacity: 0.8;
+}
+
+label {
+  display: block;
+  margin-top: 30px;
+}
+#head{
+    font-size: 30px;
+    margin-left: 40px;
+}
+#pep{
+    margin-top: 100px;
+    margin-left: 90px;
+}
+#api{
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    list-style: none;
+    margin-left: -30px;
+
+}
+
+#ggl{
+    padding-left: 45px;
+color: #C68CDD;
+}
+
+#fcb{
+    color: #C68CDD;
+    padding-left: 35px;
+}
+#pep2{
+     margin-top: 35px;
+    margin-left: 40px;
+}
+#sign{
+    text-decoration: none;
+    color: #C68CDD;
+}
+#frmIn{
+    margin-left: 35%;
+    margin-top: 5%;
+  width:499px;
+  height:510px;
+  background-color:#F7F6F6;
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:#EAE5E5;
+  border-radius:30px;
+  color:#20B3F2;
+}
+#formaIn{
+     margin-left: 20%;
+}
+#head2{
+     font-size: 30px;
+    margin-left: 25%;
+}
+#remPas{
+    margin-top: 35px;
+}
+#pep3{
+     margin-top: 35px;
+    margin-left: 47px;
+}
+#lbl{
+    margin-top: -18px;
+    margin-left: 22px;
+}
+
+#submit2{
+    border-width:0px;
+  position:absolute;
+  width:300px;
+  height:38px;
+  background-color:rgba(129, 211, 248, 0.819607843137255);
+  box-sizing:border-box;
+  border-width:1px;
+  border-style:solid;
+  border-color:rgba(0, 160, 228, 1);
+  border-radius:10px;
+  font-family:'Lato', sans-serif;
+  font-weight:400;
+  font-style:normal;
+  font-size:18px;
+  color:#FFFFFF;
+    margin-top: 1%;
+}
+#submit2:hover{
+
+cursor: pointer;
+  background-color:rgba(186, 234, 255, 0.996078431372549);
+
+}
+#forgot{
+    margin-top: -18px;
+    margin-left: 180px;
+    color: #C68CDD;
+}

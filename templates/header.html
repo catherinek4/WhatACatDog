@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <header>
+        <nav class="menu">
+            <ul id="headlist">
+                <a href="{{ url_for('show_signUp') }}" target="_blank"><img
+                        src="{{ url_for('static', filename='css//images/prof.png.png') }}" id="profile"></a>
+                <li><a href="main.html#about" target="_top" style="cursor:pointer"> ABOUT US </a></li>
+                <li> <a href="main.html#usage" target="_top" style="cursor:pointer"> HOW TO USE </a> </li>
+                <li> <a href="main.html" target="_top" style="cursor:pointer"> HOME PAGE </a>
+                </li>
+                <img src="{{ url_for('static', filename='css//images/logo.png.png') }}" id="logo">
+            </ul>
+        </nav>
+    </header>
+</body>
+
+</html>
