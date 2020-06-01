@@ -9,21 +9,27 @@
 <body>
     <header>
         <div class="wrapper">
-        <div class="header logo"><a href="#"><img src="{{ url_for('static', filename='css//images/logo.png.png') }}" alt="logo"></a></div>
-        <div class="headwrapper">
-        <div class="header name">
-                WhatACat?Dog
+            <div class="header logo"><a href="#"><img src="{{ url_for('static', filename='css//images/logo.png.png') }}"
+                        alt="logo"></a></div>
+            <div class="headwrapper">
+                <div class="header name">
+                    WhatACat?Dog
+                </div>
+                <nav>
+                    <ul class="topmenu">
+                        <li class="hover" style="padding-right: 95px;"><a href="{{ url_for('home') }}" class="hov">HOME
+                                PAGE</a></li>
+                        <li class="hover"><span class=" partition"></span><a href="main.html#usage"
+                                class="active hover">HOW TO USE</a></li>
+                        <li class="hover" style="padding-left: 95px"><span class=" partition"></span><a
+                                href="main.html#about" class="hov">ABOUT US</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="header logo profile"><a href="{{ url_for('show_signUp') }}" id="profile"><img
+                        src="{{ url_for('static', filename='css//images/prof.png') }}"
+                        style="width: 100px; height: 108px; margin-left: 50px; " alt="profile"></a></div>
         </div>
-            <nav>
-                 <ul class="topmenu">    
-                        <li class="hover" style="padding-right: 95px;"><a href="{{ url_for('home') }}" class="hov">HOME PAGE</a></li>
-                        <li class="hover"><span class=" partition"></span><a href="main.html#usage" class="active hover">HOW TO USE</a></li>
-                         <li class="hover" style="padding-left: 95px"><span class=" partition"></span><a href="main.html#about" class="hov">ABOUT US</a></li>
-                </ul>
-            </nav>
-        </div>
-        <a href="{{ url_for('show_signUp') }}" id="profile"></a><div class="header logo profile"><img src="{{ url_for('static', filename='css//images/prof.png') }}" style="width: 100px; height: 108px; margin-left: 50px; " alt="profile"></div></a>
-    </div>
     </header>
 </body>
 
