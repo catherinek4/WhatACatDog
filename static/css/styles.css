@@ -33,7 +33,6 @@ ol, ul {
 blockquote, q {
  quotes: none;
 }
-
 blockquote:before, blockquote:after,
 q:before, q:after {
  content: '';
@@ -378,27 +377,25 @@ iframe
 background-image: url(images/uphover.png);
 }
 .telegram{
+  position: fixed;
   left: 25px;
   top: 45%;
   height: 100px;
   width: 100px;
   cursor: pointer;
-  position: fixed;
+  z-index: 1;
   background-image: url(images/telegram1.png);
   animation: rotating 4s linear 0s infinite;
-  z-index: 1;
+
 }
+
 .telegram a{
   height: 100px;
   width: 100px;
-   position: fixed;
-     left: 25px;
-  top: 45%;
 }
 .telegram:hover {
   background-image: url(images/telegramhov.png);
 }
-
 .estrellas {
   position: fixed;
   width: 100px;
@@ -513,6 +510,7 @@ color: rgba(23,163,226);
   line-height: 70px;
   transform-origin: bottom center;
 }
+
 
 @keyframes rotating {
   0% {
