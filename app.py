@@ -1,6 +1,8 @@
 import os
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 from flask import Flask, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
+from user import User
 import csv
 # import numpy as np
 # import matplotlib.pyplot as plt
@@ -36,6 +38,10 @@ app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 # https://flask-login.readthedocs.io/en/latest
 login_manager = LoginManager()
 login_manager.init_app(app)
+@login_manager.user_loader
+def load_user(user_email):
+    return User.getByEmail(user_email)
+
 
 @app.route('/')
 def home():
@@ -107,5 +113,5 @@ def callback():
     return googleAuth.callback()
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=4567)
+    app.run(debug=True, host='0.0.0.0', port=4826)
     #app.run(ssl_context="adhoc")
