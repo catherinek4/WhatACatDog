@@ -1,30 +1,7 @@
 import sqlalchemy as db
 
-class RecognitionOutputCat:
-    def __init__(self, breed, weight, longevity_age, origin_country, wool_length, height, colors, history):
-        self.breed = breed
-        self.weight = weight
-        self.longevity_age = longevity_age
-        self.origin_country = origin_country
-        self.wool_length = wool_length
-        self.height = height
-        self.colors = colors
-        self.history = history
-    
-
-
-class RecognitionOutputDog:
-    def __init__(self, breed, weight, longevity_age, origin_country, icf_group, height, colors, history):
-        self.breed = breed
-        self.weight = weight
-        self.longevity_age = longevity_age
-        self.origin_country = origin_country
-        self.icf_group = icf_group
-        self.height = height
-        self.colors = colors
-        self.history = history
-
-
+'''pip install sqlalchemy'''
+'''Может потребоваться pip install mysqlclient'''
 '''Класс который инкапсулирует подключение к mysql базе и таблицам cat, dog и некоторых запросов'''
 class CatDogRepository:
     def __init__(self, password, db_name, user='root', host='localhost'):
@@ -48,6 +25,29 @@ class CatDogRepository:
         r = rp.fetchone()
         return RecognitionOutputDog(r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8])
 
+class RecognitionOutputCat:
+    def __init__(self, breed, weight, longevity_age, origin_country, wool_length, height, colors, history):
+        self.breed = breed
+        self.weight = weight
+        self.longevity_age = longevity_age
+        self.origin_country = origin_country
+        self.wool_length = wool_length
+        self.height = height
+        self.colors = colors
+        self.history = history
+    
+
+
+class RecognitionOutputDog:
+    def __init__(self, breed, weight, longevity_age, origin_country, icf_group, height, colors, history):
+        self.breed = breed
+        self.weight = weight
+        self.longevity_age = longevity_age
+        self.origin_country = origin_country
+        self.icf_group = icf_group
+        self.height = height
+        self.colors = colors
+        self.history = history
 
 
 # rep = CatDogRepository('pass', 'whatacatdog')
