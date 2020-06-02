@@ -533,3 +533,91 @@ color: rgba(23,163,226);
     }
 
 }
+.preloader {
+  /*фиксированное позиционирование*/
+  position: fixed;
+  /* координаты положения */
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  /* фоновый цвет элемента */
+  background: rgba(215,243,255);
+  z-index: 10;
+  /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+
+}
+.wait{
+  font-size: 25px;
+  position: absolute;
+  top: 35%;
+left: 463px;
+  font-family: "Arial Обычный", Arial, sans-serif;
+    font-weight: 400;
+opacity: 0.42;
+}
+#walk{
+  position: absolute;
+  top: 40%;
+  margin-top: 40px; /*big - no*/
+  background: url("images/catsmall.png");
+  width: 101.25px;   /*w - 405px, h - 210px*/
+  height: 52.5px;
+  animation: walk 1s steps(12) infinite,
+  forward 5s linear infinite; /*when big - 5s*/
+    
+
+}
+@keyframes walk{
+  0%{
+    background-position: 1215px;  /*w - 4860px*/
+  }
+  100%{
+    background-position: 0px; 
+  }
+}
+@keyframes forward{
+  0%{
+    transform: translateX(300px); /*-100px, to - 1200px*/
+  }
+  100%{
+    transform: translateX(800px);
+  }
+}
+.loaded_hiding .preloader {
+  transition: 0.3s visibility;
+  visibility:  hidden;  
+  
+}
+
+.loaded .preloader {
+  display: none;
+  visibility:   visible;  
+
+}
+.loadline {
+        height: 6px;  /* Может быть любой */
+        position: relative;
+        background: white;
+        border-radius: 25px;
+        width: 640px;
+        border: 2px solid rgba(2, 167, 240);
+        top: 55%;
+        left: 319px;
+}
+.loadline span{
+  height: 6px;
+  position: absolute;
+  background: rgba(97, 207, 254, 1);
+  animation: wait 7s infinite;
+}
+@keyframes wait{
+  0%{
+    width:0px;
+   /*transform: translateX(0px);/*w - 4860px*/
+  }
+  100%{
+    width:640px;
+   /* transform: translateX(1000px)*/
+  }
+}

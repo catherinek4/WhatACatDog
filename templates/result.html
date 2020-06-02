@@ -48,7 +48,13 @@
 
     </div>
     <!-- How to use part -->
-
+    <div class="preloader">
+        <p class="wait">Wait, recognition is in process...</p>
+        <div id="walk"></div>
+        <div class="loadline">
+            <span style="width: 25%"></span>
+    </div>
+      </div>
 </body>
 
 </html>
@@ -73,3 +79,12 @@
         });
     });
 </script>
+<script>
+    window.onload = function () {
+      document.body.classList.add('loaded_hiding');
+      window.setTimeout(function () {
+        document.body.classList.add('loaded');
+        document.body.classList.remove('loaded_hiding');
+      }, 1000000);
+    }
+  </script>
