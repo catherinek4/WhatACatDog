@@ -108,15 +108,15 @@
     <div class="popup js-popup-campaign">
           <div id='frmIn'>
       <div class="close-popup js-close-campaign"></div>
- <form action="#" method="post" id='formaIn'>
+ <form action="/signIn" method="post" id='formaIn'>
+<span>{{ errorSignIn }}</span>
 <h2 id='head2'>Sign In</h2>
-
     <label for="Email" class="floatLabel" id='l2'>Email Address</label>
           <br>
-    <input id="Email" name="Email" type="text" class="inp">
+    <input id="Email" name="email" type="text" class="inp">
     <label for="password" class="floatLabel" id='l3'>Password</label>
           <br>
-    <input id="password" name="password" type="password" class="inp" >
+    <input id="Password" name="password" type="password" class="inp" >
      <div>
      <input type="checkbox" id="remPas" name="rp">
          <label for="rp" id='lbl'> Remember me</label>
@@ -126,7 +126,12 @@
      <p id='pep'> Or sign in using </p>
      <ul id='api'>
      
-         <li id='ggl'><img src="{{ url_for('static', filename='css//images/u191.png') }}" style="height: 20px; width: 20px; margin-bottom: -5px;"> Google  </li>
+         <li id='ggl'>
+		<a class="button" href="/signGoogle">
+			<img src="{{ url_for('static', filename='css//images/u191.png') }}" style="height: 20px; width: 20px; margin-bottom: -5px;"> 
+			Google  
+		</a>
+	</li>
         
      </ul>
      <p id='pep3'> Don`t have an account? <a id='sign' href="#" class="signUp"> Create</a> </p>
@@ -138,23 +143,27 @@
     <div class="popup js-popup-campaign1">
            <div id='frm'>
       <div class="close-popup close-popup1 js-close-campaign1"></div>
- <form action="#" method="post" id='forma'>
+ <form action="/signUp" method="post" id='forma'>
 <h2 id='head'>Create an account</h2>
-     
+     <span>{{ errorSignUp }}</span>
     <label for="FN" class="floatLabel" id='l1' >Full name:</label>
          <br>
-    <input id="FN" name="FN" type="text" class="inp" placeholder="ex. Ivanov Ivan">
+    <input id="FN" name="fn" type="text" class="inp" placeholder="ex. Ivanov Ivan" minlength="5">
     <label for="Email" class="floatLabel" id='l2'>Email:</label>
           <br>
-    <input id="Email" name="Email" type="text" class="inp" placeholder="ex. ivanovivan@gmail.com">
+    <input id="email" name="email" type="text" class="inp" placeholder="ex. ivanovivan@gmail.com" minlength="5">
     <label for="password" class="floatLabel" id='l3'>Password:</label>
           <br>
-    <input id="password" name="password" type="password" class="inp" placeholder="min. 6 characters">
+    <input id="password" name="password" type="password" class="inp" placeholder="min. 6 characters" minlength="6">
     <input type="submit" value="Create your account" id="submit">
      <p id='pep'> Or sign up using </p>
-     <ul id='api'>
-     
-         <li id='ggl'><img src="{{ url_for('static', filename='css//images/u191.png') }}" style="height: 20px; width: 20px; margin-bottom: -5px;"> Google  </li>
+     <ul id='api'>     
+         <li id='ggl'>
+		<a class="button" href="/signGoogle">
+			<img src="{{ url_for('static', filename='css//images/u191.png') }}" style="height: 20px; width: 20px; margin-bottom: -5px;"> 
+			Google  
+		</a>
+	</li>
      </ul>
      <p id='pep2'> Already have an account? <a id='sign' class="sign" href='#'> Sign in</a> </p>
 </form> 
