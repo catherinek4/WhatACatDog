@@ -43,9 +43,28 @@ def upload_image():
                 reader = csv.DictReader(csvfile)
                 for i, row in enumerate(reader):
                     if i == 3:
-                        value = row['name']
+                        name = row['name']
+                        weight = row['weight']
+                        life = row['life_exp']
+                        country = row['country']
+                        height = row['height']
+                        colors = row['colors']
+                        history = row['history']
+                        img_breed1 = 'cats/'+str(i)+'.jpg'
                         break
-    return render_template('result.html', result = value)
+                for i, row in enumerate(reader):
+                    if i == 5:
+                        name2 = row['name']
+                        weight2 = row['weight']
+                        life2 = row['life_exp']
+                        country2 = row['country']
+                        height2 = row['height']
+                        colors2 = row['colors']
+                        history2 = row['history']
+                        img_breed2 = 'cats/'+str(i)+'.jpg'
+                        break
+                
+    return render_template('result.html', name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
 
 
 @app.route('/header/')
