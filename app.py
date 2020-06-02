@@ -2,12 +2,13 @@ import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 from flask import Flask, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
-from user import User
 import csv
 
 import googleAuth
 import signUp
 import signIn
+from user import User
+from request import Request
 from flask_login import (
     LoginManager,
     current_user,
@@ -15,7 +16,6 @@ from flask_login import (
     login_user,
     logout_user,
 )
-
 UPLOAD_FOLDER = 'user_images'
 
 app = Flask(__name__)
@@ -25,6 +25,7 @@ app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 # https://flask-login.readthedocs.io/en/latest
 login_manager = LoginManager()
 login_manager.init_app(app)
+
 @login_manager.user_loader
 def load_user(user_email):
     return User.getByEmail(user_email)
@@ -156,12 +157,21 @@ def upload_image():
                         history2 = row['history']
                         img_breed2 = value+'/'+str(i)+'.jpg'
                         break           
-        return render_template('result.html',prediction_breed = prediction_breed, prediction_breed2 = prediction_breed2, name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)           
+            return render_template('result.html',prediction_breed = prediction_breed, prediction_breed2 = prediction_breed2, name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)           
+                        #img_breed2 = 'cats/'+str(i)+'.jpg'
+                        #break
+    	    #create_request(src, name, name2)                
+    #return render_template('result.html', name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
 
+def create_request(image, breed1, breed2):
+    user_id = None
+    if not current_user.is_authenticated:
+	user_id = current_user.id
+    return Request.create(user_id, image, breed1, breed2)
+    
 @app.route('/header/')
 def show_header():
     return render_template('header.html')
-
 
 @app.route('/signUp/', methods=["GET", "POST"])
 def _signUp():
@@ -169,7 +179,6 @@ def _signUp():
     email = request.form['email']
     password = request.form['password']
     return signUp.login(name, email, password)
-
 
 @app.route('/signIn/', methods=["GET", "POST"])
 def _signIn():
