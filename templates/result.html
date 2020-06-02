@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
     <title> WhatACatDog </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -11,44 +12,46 @@
         <div id="base"></div>
         <iframe src="{{ url_for('show_header') }}"></iframe>
     </header>
-    <!-- Result part -->
-    <div>
+     <!-- Result part -->
+     <div>
         <p id="recogn"> The result of recognition </p>
         <div id='uploading'>
-            <img src="/static/css/images/{{img_breed1}}">
-            Name: {{name}} </br>
-            weight: {{weight}} </br>
-            life: {{life}} </br>
-            country: {{country}} </br>
-            height: {{height}} </br>
-            colors: {{colors}} </br>
-            history: {{history}} </br></br></br>
-
-            <img src="/static/css/images/{{img_breed2}}">
-            Name: {{name2}} </br>
-            weight: {{weight2}} </br>
-            life: {{life2}} </br>
-            country: {{country2}} </br>
-            height: {{height2}} </br>
-            colors: {{colors2}} </br>
-            history: {{history2}} </br>
-
-
+            <div class="firstbreed">
+            <div class="image"><img src="/static/css/images/{{img_breed1}}"></div>
+           <h1> {{name.decode('utf-8')}} </h1>
+           <div class="info">
+           <p> Weight range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{weight.decode('utf-8')}} </span> </p>
+            <p>Longevity Range:&nbsp;<span>{{life.decode('utf-8')}} </span></p>
+           <p>Original country:&nbsp;&nbsp;<span>{{country.decode('utf-8')}}</span> </p>
+           <p>Height range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{height.decode('utf-8')}} </span></p>
+           <p style="  width:  600px;">Colors:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{colors.decode('utf-8')}}</span> </p>
+           <p class="his"> History </p>
+           <div class="history"> <span> {{history.decode('utf-8')}} </span></div>
+       </div>
         </div>
-
-        <div id="u0" class="ax_default image">
-            <img id="u0_img" class="img " src="{{ url_for('static', filename='css//images/u0.jpg') }}" />
+        <div class="firstbreed">
+            <div class="image img1"><img src="/static/css/images/{{img_breed2}}"></div>
+           <h1> {{name2.decode('utf-8')}} </h1>
+           <div class="info">
+           <p> Weight range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{weight2.decode('utf-8')}} </span> </p>
+            <p>Longevity Range:&nbsp;<span>{{life2.decode('utf-8')}} </span></p>
+           <p>Original country:&nbsp;&nbsp;<span>{{country2.decode('utf-8')}}</span> </p>
+           <p>Height range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{height2.decode('utf-8')}} </span></p>
+           <p style="  width:  600px;">Colors:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color">{{colors2.decode('utf-8')}}</span> </p>
+           <p class="his"> History </p>
+           <div class="history"> <span> {{history2.decode('utf-8')}} </span></div>
+       </div>
         </div>
-        <div id="u1" class="ax_default image">
-            <img id="u1_img" class="img " src="{{ url_for('static', filename='css//images/u1.png') }}" />
         </div>
-        <div id="u2" class="ax_default image">
-            <img id="u2_img" class="img " src="{{ url_for('static', filename='css//images/u2.png') }}" />
         </div>
-
-    </div>
     <!-- How to use part -->
-
+    <div class="preloader">
+        <p class="wait">Wait, recognition is in process...</p>
+        <div id="walk"></div>
+        <div class="loadline">
+            <span style="width: 25%"></span>
+    </div>
+      </div>
 </body>
 
 </html>
@@ -73,3 +76,12 @@
         });
     });
 </script>
+<script>
+    window.onload = function () {
+      document.body.classList.add('loaded_hiding');
+      window.setTimeout(function () {
+        document.body.classList.add('loaded');
+        document.body.classList.remove('loaded_hiding');
+      }, 1000000);
+    }
+  </script>

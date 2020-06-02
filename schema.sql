@@ -4,3 +4,11 @@ CREATE TABLE user(
   email TEXT UNIQUE NOT NULL,
   password TEXT
 );
+
+CREATE TABLE request(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER,
+  image TEXT NOT NULL,
+  breed1 TEXT,
+  breed2 TEXT
+);

@@ -1,4 +1,5 @@
 import os
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 from flask import Flask, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 import csv
@@ -19,6 +20,8 @@ import csv
 import googleAuth
 import signUp
 import signIn
+from user import User
+from request import Request
 from flask_login import (
     LoginManager,
     current_user,
@@ -26,7 +29,6 @@ from flask_login import (
     login_user,
     logout_user,
 )
-
 UPLOAD_FOLDER = 'user_images'
 
 app = Flask(__name__)
@@ -36,6 +38,11 @@ app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 # https://flask-login.readthedocs.io/en/latest
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_email):
+    return User.getByEmail(user_email)
+
 
 @app.route('/')
 def home():
@@ -48,8 +55,8 @@ def upload_image():
         if request.files:
             image_from_user = request.files["image"]
             image_from_user.save(os.path.join(
-                app.config["IMAGE_UPLOADS"], image_from_user.filename))
-            src = './user_images/' + str(image_from_user.filename) 
+                app.config["IMAGE_UPLOADS"], str((image_from_user.filename).decode('utf-8'))))
+            src = './user_images/' + str((image_from_user.filename).decode('utf-8'))
             ind = 3
             with open('data/csv/cats.csv') as csvfile:
                 reader = csv.DictReader(csvfile)
@@ -75,10 +82,15 @@ def upload_image():
                         history2 = row['history']
                         img_breed2 = 'cats/'+str(i)+'.jpg'
                         break
-                
+    	    create_request(src, name, name2)                
     return render_template('result.html', name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
 
-
+def create_request(image, breed1, breed2):
+    user_id = None
+    if not current_user.is_authenticated:
+	user_id = current_user.id
+    return Request.create(user_id, image, breed1, breed2)
+    
 @app.route('/header/')
 def show_header():
     return render_template('header.html')
@@ -107,5 +119,5 @@ def callback():
     return googleAuth.callback()
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=4567)
-    #app.run(ssl_context="adhoc")
+    #app.run(debug=True, host='0.0.0.0', port=4826)
+    app.run(ssl_context="adhoc")

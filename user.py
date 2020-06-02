@@ -1,16 +1,14 @@
 from flask_login import UserMixin
-
 from db import get_db
-
 
 class User(UserMixin):
 
     def __init__(self, id_, name, email, password):
-	self.id = id_
+        self.id = id_
         self.name = name
         self.email = email
         self.password = password
-
+	    
     @staticmethod
     def getByEmail(user_email):
         db = get_db()
