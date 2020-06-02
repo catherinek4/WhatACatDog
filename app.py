@@ -122,6 +122,7 @@ def upload_image():
                 
                 breed = cats[np.argmax(prediction[0])]
                 prediction_breed = prediction[0][np.argmax(prediction[0])] * 100
+                prediction_breed = "{:5.3f}".format(prediction_breed)
                 firts_breed_index = np.argmax(prediction[0])
                 
                 arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
@@ -129,14 +130,15 @@ def upload_image():
 
                 breed2 = cats2[np.argmax(arr2)]
                 prediction_breed2 = arr2[np.argmax(arr2)] * 100
+                prediction_breed2 = "{:5.3f}".format(prediction_breed2)
                 second_breed_index = np.argmax(arr2)
             
             path_to_csv = 'data/csv/' + value + '.csv'
           
             with open(path_to_csv, encoding='utf-8', errors='replace') as csvfile:
                 reader = csv.DictReader(csvfile)
-                for i, row in enumerate(reader):
-                    if i == firts_breed_index:
+                for row in reader:
+                    if row['name'] == breed:
                         name = row['name']
                         weight = row['weight']
                         life = row['life_exp']
@@ -144,10 +146,10 @@ def upload_image():
                         height = row['height']
                         colors = row['colors']
                         history = row['history']
-                        img_breed1 = value+'/'+str(i)+'.jpg'
+                        img_breed1 = value+'/'+str(breed)+'.jpg'
                         break
-                for i, row in enumerate(reader):
-                    if i == second_breed_index:
+                for row in reader:
+                    if row['name'] == breed2:
                         name2 = row['name']
                         weight2 = row['weight']
                         life2 = row['life_exp']
@@ -155,7 +157,7 @@ def upload_image():
                         height2 = row['height']
                         colors2 = row['colors']
                         history2 = row['history']
-                        img_breed2 = value+'/'+str(i)+'.jpg'
+                        img_breed2 = value+'/'+str(breed2)+'.jpg'
                         break           
             return render_template('result.html',prediction_breed = prediction_breed, prediction_breed2 = prediction_breed2, name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)           
                         #img_breed2 = 'cats/'+str(i)+'.jpg'
@@ -166,7 +168,7 @@ def upload_image():
 def create_request(image, breed1, breed2):
     user_id = None
     if not current_user.is_authenticated:
-	user_id = current_user.id
+	    user_id = current_user.id
     return Request.create(user_id, image, breed1, breed2)
     
 @app.route('/header/')
