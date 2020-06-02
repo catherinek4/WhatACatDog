@@ -25,7 +25,7 @@ def load_user(user_email):
 
 def login(user_name, user_email, user_password):
     if User.getByEmail(user_email):
-	return render_template('main.html', errorSignUp="User with this email already exists")
+	    return render_template('main.html', errorSignUp="User with this email already exists")
     # Doesn't exist? Add to database
     User.createByForm(user_name, user_email, user_password)
 	
