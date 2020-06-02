@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <title> WhatACatDog </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <header>
+        <div id="base"></div>
+        <iframe src="{{ url_for('show_header') }}"></iframe>
+    </header>
+    <!-- Result part -->
+    <div>
+        <p id="recogn"> The result of recognition </p>
+        <div id='uploading'>
+            {{result}}
+        </div>
+
+        <div id="u0" class="ax_default image">
+            <img id="u0_img" class="img " src="{{ url_for('static', filename='css//images/u0.jpg') }}" />
+        </div>
+        <div id="u1" class="ax_default image">
+            <img id="u1_img" class="img " src="{{ url_for('static', filename='css//images/u1.png') }}" />
+        </div>
+        <div id="u2" class="ax_default image">
+            <img id="u2_img" class="img " src="{{ url_for('static', filename='css//images/u2.png') }}" />
+        </div>
+
+    </div>
+    <!-- How to use part -->
+
+</body>
+
+</html>
+<script>
+    $(document).ready(function () {
+        // $('#scroller').fadeOut();   
+        //fade in/out based on scrollTop value
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 550) {
+                $('#scroller').fadeIn();
+            } else {
+                $('#scroller').fadeOut();
+            }
+        });
+
+        // scroll body to 0px on click
+        $('#scroller').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 400);
+            return false;
+        });
+    });
+</script>

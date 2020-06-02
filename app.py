@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
+import csv
 # import numpy as np
 # import matplotlib.pyplot as plt
 # import tensorflow
@@ -36,20 +37,15 @@ def upload_image():
             image_from_user = request.files["image"]
             image_from_user.save(os.path.join(
                 app.config["IMAGE_UPLOADS"], image_from_user.filename))
-            src = './user_images/' + str(image_from_user.filename)
-            '''
-            img1 = image.load_img(src, target_size=(64, 64))
-            img = image.img_to_array(img1)
-            img = img/255
-            img = np.expand_dims(img, axis=0)
-            prediction = classifier.predict(img, batch_size=None, steps=1)
-            if prediction[0][0] > 0.5:
-                value = 'Dog'
-            else:
-                value = 'Cat'
-            return value
-            '''
-    return render_template('main.html')
+            src = './user_images/' + str(image_from_user.filename) 
+            ind = 3
+            with open('data/csv/cats.csv') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for i, row in enumerate(reader):
+                    if i == 3:
+                        value = row['name']
+                        break
+    return render_template('result.html', result = value)
 
 
 @app.route('/header/')
