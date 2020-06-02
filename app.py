@@ -4,20 +4,7 @@ from flask import Flask, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 from user import User
 import csv
-# import numpy as np
-# import matplotlib.pyplot as plt
-# import tensorflow
-# from tensorflow.python.keras.preprocessing import image
-# import subprocess
-# from tensorflow.keras.models import load_model
 
-# classifier = load_model('resources/dogcat_model_bak.h5')
-# classifier_cat = load_model('resources/cat_model_bak.h5')
-# classifier_dog = load_model('resources/dog_model_bak.h5')
-# cats = ["Abyssinian", "Bengal", "Birman", "Bombay", "British Shorthair", "Egyptian Mau",
-# "Maine Coon", "Persian", "Ragdoll", "Russian Blue", "Siamese", "Sphynx"]
-# dogs = ['Tibetan_terrier', 'Border_collie', 'dhole', 'clumber', 'Pembroke', 'Kerry_blue_terrier', 'Tibetan_mastiff', 'Bedlington_terrier', 'Walker_hound', 'black-and-tan_coonhound', 'malamute', 'Cardigan', 'schipperke', 'German_short-haired_pointer', 'golden_retriever', 'Afghan_hound', 'otterhound', 'African_hunting_dog', 'Italian_greyhound', 'Great_Dane', 'miniature_schnauzer', 'Pomeranian', 'Border_terrier', 'Airedale', 'Chihuahua', 'kuvasz', 'Chesapeake_Bay_retriever', 'miniature_pinscher', 'Norwich_terrier', 'French_bulldog', 'Ibizan_hound', 'Shih-Tzu', 'EntleBucher', 'Samoyed', 'vizsla', 'cocker_spaniel', 'Blenheim_spaniel', 'Rottweiler', 'whippet', 'groenendael', 'Bouvier_des_Flandres', 'Australian_terrier', 'redbone', 'Sussex_spaniel', 'basset', 'standard_poodle', 'flat-coated_retriever', 'chow', 'basenji', 'American_Staffordshire_terrier', 'Appenzeller', 'Staffordshire_bullterrier', 'soft-coated_wheaten_terrier', 'Irish_setter', 'silky_terrier', 'Rhodesian_ridgeback', 'Weimaraner', 'Eskimo_dog', 'briard', 'affenpinscher',
-#  'Scottish_deerhound', 'Yorkshire_terrier', 'pug', 'Norwegian_elkhound', 'bloodhound', 'bull_mastiff', 'Old_English_sheepdog', 'Labrador_retriever', 'Saluki', 'giant_schnauzer', 'Japanese_spaniel', 'Lhasa', 'Norfolk_terrier', 'papillon', 'Irish_terrier', 'Brabancon_griffon', 'Irish_wolfhound', 'boxer', 'malinois', 'collie', 'standard_schnauzer', 'German_shepherd', 'beagle', 'English_setter', 'toy_poodle', 'Sealyham_terrier', 'West_Highland_white_terrier', 'Greater_Swiss_Mountain_dog', 'dingo', 'English_springer', 'Brittany_spaniel', 'Maltese_dog', 'curly-coated_retriever', 'Doberman', 'Shetland_sheepdog', 'Lakeland_terrier', 'Mexican_hairless', 'Saint_Bernard', 'English_foxhound', 'borzoi', 'Leonberg', 'Welsh_springer_spaniel', 'wire-haired_fox_terrier', 'miniature_poodle', 'Newfoundland', 'toy_terrier', 'Irish_water_spaniel', 'Gordon_setter', 'Great_Pyrenees', 'Scotch_terrier', 'Siberian_husky', 'komondor', 'bluetick', 'cairn', 'Pekinese', 'Boston_bull', 'Dandie_Dinmont', 'kelpie', 'Bernese_mountain_dog', 'keeshond']
 import googleAuth
 import signUp
 import signIn
@@ -47,6 +34,57 @@ def load_user(user_email):
 def home():
     return render_template('main.html')
 
+# #################### ЕСЛИ ПОСМОТРЕТЬ КАК ОНО РАБОТАЕТ И ЗАПУСТИТЬ У СЕБЯ ########################
+# @app.route('/', methods=["GET", "POST"])
+# def upload_image():
+#     if request.method == "POST":
+#         if request.files:
+#             image_from_user = request.files["image"]
+#             image_from_user.save(os.path.join(
+#                 app.config["IMAGE_UPLOADS"], image_from_user.filename))
+#             src = './user_images/' + str(image_from_user.filename) 
+#             with open('data/csv/cats.csv') as csvfile:
+#                 reader = csv.DictReader(csvfile)
+#                 for i, row in enumerate(reader):
+#                     if i == 3:
+#                         name = row['name']
+#                         weight = row['weight']
+#                         life = row['life_exp']
+#                         country = row['country']
+#                         height = row['height']
+#                         colors = row['colors']
+#                         history = row['history']
+#                         img_breed1 = 'cats/'+str(i)+'.jpg'
+#                         break
+#                 for i, row in enumerate(reader):
+#                     if i == 5:
+#                         name2 = row['name']
+#                         weight2 = row['weight']
+#                         life2 = row['life_exp']
+#                         country2 = row['country']
+#                         height2 = row['height']
+#                         colors2 = row['colors']
+#                         history2 = row['history']
+#                         img_breed2 = 'cats/'+str(i)+'.jpg'
+#                         break           
+#     return render_template('result.html', name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
+
+
+######################### ТОЛЬКО ЕСЛИ ЕСТЬ TENSORFLOW + CUDA #############################
+import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow
+from tensorflow.python.keras.preprocessing import image
+import subprocess
+from tensorflow.keras.models import load_model
+
+classifier = load_model('resources/dogcat_model_bak.h5')
+classifier_cat = load_model('resources/cat_model_bak.h5')
+classifier_dog = load_model('resources/dog_model_bak.h5')
+cats = ["Abyssinian", "Bengal", "Birman", "Bombay", "British Shorthair", "Egyptian Mau",
+"Maine Coon", "Persian", "Ragdoll", "Russian Blue", "Siamese", "Sphynx"]
+dogs = ['Tibetan_terrier', 'Border_collie', 'dhole', 'clumber', 'Pembroke', 'Kerry_blue_terrier', 'Tibetan_mastiff', 'Bedlington_terrier', 'Walker_hound', 'black-and-tan_coonhound', 'malamute', 'Cardigan', 'schipperke', 'German_short-haired_pointer', 'golden_retriever', 'Afghan_hound', 'otterhound', 'African_hunting_dog', 'Italian_greyhound', 'Great_Dane', 'miniature_schnauzer', 'Pomeranian', 'Border_terrier', 'Airedale', 'Chihuahua', 'kuvasz', 'Chesapeake_Bay_retriever', 'miniature_pinscher', 'Norwich_terrier', 'French_bulldog', 'Ibizan_hound', 'Shih-Tzu', 'EntleBucher', 'Samoyed', 'vizsla', 'cocker_spaniel', 'Blenheim_spaniel', 'Rottweiler', 'whippet', 'groenendael', 'Bouvier_des_Flandres', 'Australian_terrier', 'redbone', 'Sussex_spaniel', 'basset', 'standard_poodle', 'flat-coated_retriever', 'chow', 'basenji', 'American_Staffordshire_terrier', 'Appenzeller', 'Staffordshire_bullterrier', 'soft-coated_wheaten_terrier', 'Irish_setter', 'silky_terrier', 'Rhodesian_ridgeback', 'Weimaraner', 'Eskimo_dog', 'briard', 'affenpinscher',
+ 'Scottish_deerhound', 'Yorkshire_terrier', 'pug', 'Norwegian_elkhound', 'bloodhound', 'bull_mastiff', 'Old_English_sheepdog', 'Labrador_retriever', 'Saluki', 'giant_schnauzer', 'Japanese_spaniel', 'Lhasa', 'Norfolk_terrier', 'papillon', 'Irish_terrier', 'Brabancon_griffon', 'Irish_wolfhound', 'boxer', 'malinois', 'collie', 'standard_schnauzer', 'German_shepherd', 'beagle', 'English_setter', 'toy_poodle', 'Sealyham_terrier', 'West_Highland_white_terrier', 'Greater_Swiss_Mountain_dog', 'dingo', 'English_springer', 'Brittany_spaniel', 'Maltese_dog', 'curly-coated_retriever', 'Doberman', 'Shetland_sheepdog', 'Lakeland_terrier', 'Mexican_hairless', 'Saint_Bernard', 'English_foxhound', 'borzoi', 'Leonberg', 'Welsh_springer_spaniel', 'wire-haired_fox_terrier', 'miniature_poodle', 'Newfoundland', 'toy_terrier', 'Irish_water_spaniel', 'Gordon_setter', 'Great_Pyrenees', 'Scotch_terrier', 'Siberian_husky', 'komondor', 'bluetick', 'cairn', 'Pekinese', 'Boston_bull', 'Dandie_Dinmont', 'kelpie', 'Bernese_mountain_dog', 'keeshond']
 
 @app.route('/', methods=["GET", "POST"])
 def upload_image():
@@ -56,11 +94,48 @@ def upload_image():
             image_from_user.save(os.path.join(
                 app.config["IMAGE_UPLOADS"], image_from_user.filename))
             src = './user_images/' + str(image_from_user.filename) 
-            ind = 3
-            with open('data/csv/cats.csv') as csvfile:
+            img1 = image.load_img(src, target_size=(64, 64))
+            img = image.img_to_array(img1)
+            img = img/255
+            img = np.expand_dims(img, axis=0)
+            prediction = classifier.predict(img, batch_size=None, steps=1)
+            if(prediction[0][0] > 0.5):
+                value = 'dogs'
+                prediction_dog = prediction[0, 0]
+                prediction = classifier_dog.predict(img, batch_size=None, steps=1)
+
+                breed = dogs[np.argmax(prediction[0])]
+                prediction_breed = prediction[0][np.argmax(prediction[0])] * 100
+                firts_breed_index = np.argmax(prediction[0])
+
+                arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
+                dogs2 = np.delete(dogs, np.argmax(prediction[0]), axis=None)
+
+                breed2 = dogs2[np.argmax(arr2)]
+                prediction_breed2 = arr2[np.argmax(arr2)] * 100
+                second_breed_index = np.argmax(arr2)
+            else:
+                value = 'cats'
+                prediction_cat = 1.0-prediction[0, 0]
+                prediction = classifier_cat.predict(img, batch_size=None, steps=1)
+                
+                breed = cats[np.argmax(prediction[0])]
+                prediction_breed = prediction[0][np.argmax(prediction[0])] * 100
+                firts_breed_index = np.argmax(prediction[0])
+                
+                arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
+                cats2 = np.delete(cats, np.argmax(prediction[0]), axis=None)
+
+                breed2 = cats2[np.argmax(arr2)]
+                prediction_breed2 = arr2[np.argmax(arr2)] * 100
+                second_breed_index = np.argmax(arr2)
+            
+            path_to_csv = 'data/csv/' + value + '.csv'
+          
+            with open(path_to_csv, encoding='utf-8', errors='replace') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for i, row in enumerate(reader):
-                    if i == 3:
+                    if i == firts_breed_index:
                         name = row['name']
                         weight = row['weight']
                         life = row['life_exp']
@@ -68,10 +143,10 @@ def upload_image():
                         height = row['height']
                         colors = row['colors']
                         history = row['history']
-                        img_breed1 = 'cats/'+str(i)+'.jpg'
+                        img_breed1 = value+'/'+str(i)+'.jpg'
                         break
                 for i, row in enumerate(reader):
-                    if i == 5:
+                    if i == second_breed_index:
                         name2 = row['name']
                         weight2 = row['weight']
                         life2 = row['life_exp']
@@ -79,11 +154,9 @@ def upload_image():
                         height2 = row['height']
                         colors2 = row['colors']
                         history2 = row['history']
-                        img_breed2 = 'cats/'+str(i)+'.jpg'
-                        break
-                
-    return render_template('result.html', name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
-
+                        img_breed2 = value+'/'+str(i)+'.jpg'
+                        break           
+        return render_template('result.html',prediction_breed = prediction_breed, prediction_breed2 = prediction_breed2, name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)           
 
 @app.route('/header/')
 def show_header():
