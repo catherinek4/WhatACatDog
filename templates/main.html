@@ -66,12 +66,16 @@
     <!-- Recognizing part)))) -->
     <div>
         <p id="recogn"> Recognize the breed of a cat/dog </p>
-        <div id='uploading'>
+        <div id='uploading1'>
             <form action="/" method="POST" enctype="multipart/form-data">
                 <!-- <button id='btnClick' onclick="document.getElementById('getFile').click()">Click here to upload an
                     image</button> -->
-                <input type='file' accept="image/jpg, image/jpeg" id="getFile" name="image">
-                <button id='rec'> RECOGNIZE </button>
+                    <div class="fl_upld">
+                        <label><input id="fl_inp" type='file' accept="image/jpg, image/jpeg" id="getFile" name="image"><div id="fl_nm">Click here to upload an image</div></label>
+                        
+                        </div>
+                                <button id='rec' class="rec"> RECOGNIZE </button>
+               
             </form>
         </div>
 
@@ -238,3 +242,11 @@ if (e.target!=popup[0]&&popup.has(e.target).lenght === 0){
 }
 });
 </script>
+<script>
+    $(document).ready( function() {
+        $("#fl_inp").change(function(){
+             var filename = $(this).val().replace(/.*\\/, "");
+             $("#fl_nm").html(filename);
+        });
+    });
+    </script>

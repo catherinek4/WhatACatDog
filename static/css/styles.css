@@ -227,10 +227,12 @@ iframe
 }
 
 #recogn{
-    margin-left: 25%;
+text-align: center; 
+
     border-width:0px;
   word-wrap:break-word;
-  margin-top:  50px;
+  margin-top:  100px;
+  margin-bottom: 50px;
   text-shadow:2px 2px 5px rgba(0, 0, 0, 0.341176470588235);
   -webkit-text-shadow:2px 2px 5px rgba(0, 0, 0, 0.341176470588235);
   -moz-text-shadow:2px 2px 5px rgba(0, 0, 0, 0.341176470588235);
@@ -242,10 +244,95 @@ iframe
   font-size:50px;
   color:#00B2FE;
 }
-#uploading{
-    margin-left: 30%;
-    margin-top: 5%;
-    z-index:99;
+#uploading img{
+  width: 250px;
+  height:   230px;
+  border: 10px solid rgba(129, 211, 248);
+  border-radius:20px;
+    display: flex;  
+  justify-content:  center; 
+  align-items:  center; 
+}
+
+.image img{
+  margin-left: auto;
+  margin-right:   auto; 
+  margin-bottom: 20px;
+  margin-top:  20px;
+}
+#uploading h1{
+    font-weight: 700;
+    font-style: normal;
+    font-size: 25px;
+    color: #20B3F2;
+    text-align:   center; 
+
+}
+#uploading p{
+width: 500px;
+    font-family: 'Arial Полужирный', 'Arial Обычный', 'Arial', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+    color: #81D3F8;
+    margin-bottom: 15px;
+}
+#uploading span{
+    font-size: 20px;
+    color: #B0B0B0;
+    font-weight: normal; 
+}
+#uploading1{
+display:  flex;
+justify-content:  center; 
+align-items:  center; 
+}
+#uploadin1 form{
+margin-left: auto;  
+margin-right:   auto; 
+}
+.his{
+  margin-top:  30px;
+
+}
+.history{
+  width: 600px;
+}
+.img1{
+  margin-top: 40px;
+}
+.info{
+    display: block ;  
+width: 500px;
+margin-left: auto;  
+margin-right:   auto; 
+
+}
+
+.fl_upld{width:300px;
+
+}
+#fl_inp{display:none;}
+.fl_upld label{
+cursor:pointer;
+   display:block;
+    width:400px;
+    height:35px;
+    background-color: white;
+    border-radius: 10px;
+    font-size: 20px;
+     color: rgba(128, 128, 128, 0.6);
+    border: 2px solid rgba(129, 211, 248, 1);
+    padding-right: 100px;
+}
+.fl_upld label:hover{
+  cursor: pointer;
+ background-color: rgba(230,248,255);
+   border: 2px solid rgba(129, 211, 248, .4);
+ }
+#fl_nm{
+margin-top:7px;
+margin-left: 5px;
 }
 #btnClick{
    display:block;
@@ -263,7 +350,7 @@ iframe
     cursor: pointer;
 }
 #rec{
-    margin-left: 40%;
+    margin-left: 380px;
      background-color:rgba(255, 255, 255, 1);
   box-sizing:border-box;
   border-width:3px;
@@ -299,18 +386,18 @@ iframe
 #u0_img {
   border-width:0px;
   position:absolute;
-    z-index: 0;
-  left:0px;
-  top:0px;
+    z-index: -2;
+  left:-50px;
+  top:-47px;
   width:400px;
   height:244px;
 }
 #u0 {
   border-width:0px;
-    z-index: 0;
+    z-index: -2;
   position:absolute;
-  left:541px;
-  top:481px;
+  left:491px;
+  top:434px;
   width:400px;
   height:244px;
   display:flex;
@@ -318,18 +405,20 @@ iframe
 }
 
 #u1_img {
+   z-index: -2;
   border-width:0px;
   position:absolute;
-  left:0px;
-  top:0px;
+  left:-50px;
+  top:-47px;
   width:69px;
   height:250px;
 }
 #u1 {
+   z-index: -2;
   border-width:0px;
   position:absolute;
-  left:100px;
-  top:675px;
+  left:50px;
+  top:628px;
   width:69px;
   height:250px;
   display:flex;
@@ -337,18 +426,20 @@ iframe
 }
 
 #u2_img {
+   z-index: -2;
   border-width:0px;
   position:absolute;
-  left:0px;
-  top:0px;
+  left:-50px;
+  top:-47px;
   width:415px;
   height:297px;
 }
 #u2 {
+   z-index: -2;
   border-width:0px;
   position:absolute;
-  left:135px;
-  top:543px;
+  left:85px;
+  top:496px;
   width:415px;
   height:297px;
   display:flex;
@@ -383,15 +474,15 @@ background-image: url(images/uphover.png);
   height: 100px;
   width: 100px;
   cursor: pointer;
-  z-index: 1;
   background-image: url(images/telegram1.png);
   animation: rotating 4s linear 0s infinite;
-
+  z-index:  1;
 }
 
 .telegram a{
   height: 100px;
   width: 100px;
+
 }
 .telegram:hover {
   background-image: url(images/telegramhov.png);
@@ -511,7 +602,6 @@ color: rgba(23,163,226);
   transform-origin: bottom center;
 }
 
-
 @keyframes rotating {
   0% {
     transform: rotate(0deg);
@@ -532,92 +622,4 @@ color: rgba(23,163,226);
     color: rgba(150,220,255);
     }
 
-}
-.preloader {
-  /*фиксированное позиционирование*/
-  position: fixed;
-  /* координаты положения */
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  /* фоновый цвет элемента */
-  background: rgba(215,243,255);
-  z-index: 10;
-  /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
-
-}
-.wait{
-  font-size: 25px;
-  position: absolute;
-  top: 35%;
-left: 463px;
-  font-family: "Arial Обычный", Arial, sans-serif;
-    font-weight: 400;
-opacity: 0.42;
-}
-#walk{
-  position: absolute;
-  top: 40%;
-  margin-top: 40px; /*big - no*/
-  background: url("images/catsmall.png");
-  width: 101.25px;   /*w - 405px, h - 210px*/
-  height: 52.5px;
-  animation: walk 1s steps(12) infinite,
-  forward 5s linear infinite; /*when big - 5s*/
-    
-
-}
-@keyframes walk{
-  0%{
-    background-position: 1215px;  /*w - 4860px*/
-  }
-  100%{
-    background-position: 0px; 
-  }
-}
-@keyframes forward{
-  0%{
-    transform: translateX(300px); /*-100px, to - 1200px*/
-  }
-  100%{
-    transform: translateX(800px);
-  }
-}
-.loaded_hiding .preloader {
-  transition: 0.3s visibility;
-  visibility:  hidden;  
-  
-}
-
-.loaded .preloader {
-  display: none;
-  visibility:   visible;  
-
-}
-.loadline {
-        height: 6px;  /* Может быть любой */
-        position: relative;
-        background: white;
-        border-radius: 25px;
-        width: 640px;
-        border: 2px solid rgba(2, 167, 240);
-        top: 55%;
-        left: 319px;
-}
-.loadline span{
-  height: 6px;
-  position: absolute;
-  background: rgba(97, 207, 254, 1);
-  animation: wait 7s infinite;
-}
-@keyframes wait{
-  0%{
-    width:0px;
-   /*transform: translateX(0px);/*w - 4860px*/
-  }
-  100%{
-    width:640px;
-   /* transform: translateX(1000px)*/
-  }
 }
