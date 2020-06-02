@@ -12,46 +12,52 @@
         <div id="base"></div>
         <iframe src="{{ url_for('show_header') }}"></iframe>
     </header>
-     <!-- Result part -->
-     <div>
+    <!-- Result part -->
+    <div>
         <p id="recogn"> The result of recognition </p>
         <div id='uploading'>
             <div class="firstbreed">
-            <div class="image"><img src="/static/css/images/{{img_breed1}}"></div>
-           <h1> {{name}} </h1>
-           <div class="info">
-           <p> Weight range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{weight}} </span> </p>
-            <p>Longevity Range:&nbsp;<span>{{life}} </span></p>
-           <p>Original country:&nbsp;&nbsp;<span>{{country}}</span> </p>
-           <p>Height range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{height}} </span></p>
-           <p style="  width:  600px;">Colors:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{colors}}</span> </p>
-           <p class="his"> History </p>
-           <div class="history"> <span> {{history}} </span></div>
-       </div>
+                <div class="image"><img src="/static/css/images/{{img_breed1}}"></div>
+                <h1> {{name1}} {{prediction_breed1}}</h1>
+                <div class="info">
+                    <p>Probability: {{prediction_breed}}</p>
+                    <p> Weight range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{weight}} </span> </p>
+                    <p>Longevity Range:&nbsp;<span>{{life}} </span></p>
+                    <p>Original country:&nbsp;&nbsp;<span>{{country}}</span> </p>
+                    <p>Height range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{height}} </span></p>
+                    <p style="  width:  600px;">
+                        Colors:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{colors}}</span>
+                    </p>
+                    <p class="his"> History </p>
+                    <div class="history"> <span> {{history}} </span></div>
+                </div>
+            </div>
+            <div class="firstbreed">
+                <div class="image img1"><img src="/static/css/images/{{img_breed2}}"></div>
+
+                <h1> {{name2}} {{prediction_breed2}}</h1>
+                <div class="info">
+                    <p> Weight range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{weight2}} </span> </p>
+                    <p>Longevity Range:&nbsp;<span>{{life2}} </span></p>
+                    <p>Original country:&nbsp;&nbsp;<span>{{country2}}</span> </p>
+                    <p>Height range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{height2}} </span></p>
+                    <p style="  width:  600px;">
+                        Colors:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                            class="color">{{colors2}}</span> </p>
+                    <p class="his"> History </p>
+                    <div class="history"> <span> {{history2}} </span></div>
+                </div>
+            </div>
         </div>
-        <div class="firstbreed">
-            <div class="image img1"><img src="/static/css/images/{{img_breed2}}"></div>
-           <h1> {{name2}} </h1>
-           <div class="info">
-           <p> Weight range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{weight2}} </span> </p>
-            <p>Longevity Range:&nbsp;<span>{{life2}} </span></p>
-           <p>Original country:&nbsp;&nbsp;<span>{{country2}}</span> </p>
-           <p>Height range:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{height2}} </span></p>
-           <p style="  width:  600px;">Colors:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color">{{colors2}}</span> </p>
-           <p class="his"> History </p>
-           <div class="history"> <span> {{history2}} </span></div>
-       </div>
-        </div>
-        </div>
-        </div>
+    </div>
     <!-- How to use part -->
     <div class="preloader">
         <p class="wait">Wait, recognition is in process...</p>
         <div id="walk"></div>
         <div class="loadline">
             <span style="width: 25%"></span>
+        </div>
     </div>
-      </div>
 </body>
 
 </html>
@@ -78,10 +84,10 @@
 </script>
 <script>
     window.onload = function () {
-      document.body.classList.add('loaded_hiding');
-      window.setTimeout(function () {
-        document.body.classList.add('loaded');
-        document.body.classList.remove('loaded_hiding');
-      }, 1000000);
+        document.body.classList.add('loaded_hiding');
+        window.setTimeout(function () {
+            document.body.classList.add('loaded');
+            document.body.classList.remove('loaded_hiding');
+        }, 1000000);
     }
-  </script>
+</script>
