@@ -30,6 +30,7 @@ classifier.add(Dense(output_dim=1, activation='sigmoid'))</br>
  
  <div>
   <h3>Telegram Bot</h3>
+  Our Telegram Bot is able to receive user images and send messages with a result of breed recognition. The process of 
   </div>
  
 
