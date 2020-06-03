@@ -268,10 +268,13 @@
                 let fn = image.files[0].name;
                 fn = fn.substr(fn.lastIndexOf('.') + 1);
                 if (fn == "jpg" || fn == "jpeg") {
-                    return;
+                    let size = 5000000; // 5 mb
+                    if (image.files[0].size <= size) {
+                        return;
+                    }
                 }
             } 
-            $("#error").text("Please choose image jpg or jpeg").show().fadeOut(4000);
+            $("#error").text("Please select a jpg or jpeg image no larger than 5 MB.").show().fadeOut(4000);
             e.preventDefault();
         })
     });
