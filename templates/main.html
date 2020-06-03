@@ -30,7 +30,7 @@
                 </nav>
             </div>
             {% if 'current_user' in session %}
-            <a href="profile.html" target="_blank">
+            <a href="{{ url_for('show_profile') }}" target="_blank">
                 <div class="header logo profile"><img src="images/proflog.png"
                         style="width: 100px; height: 108px; margin-left: 50px; " alt="profile"></div>
             </a>
