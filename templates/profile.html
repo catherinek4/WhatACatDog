@@ -1,13 +1,13 @@
 <html>
-<head>
-    <title> WhatACatDog </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src='http://muller.fly-studio.com.ua/wp-content/themes/muller/assistant/owl.carousel/owl.carousel.min.js?ver=4.9.4'></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='owl/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='owl/owl/owl.theme.default.min.css') }}">
-    <script src="{{ url_for('static', filename='owl/owl.carousel.min.js')}}"></script>
-</head>
+    <head>
+        <title> WhatACatDog </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src='http://muller.fly-studio.com.ua/wp-content/themes/muller/assistant/owl.carousel/owl.carousel.min.js?ver=4.9.4'></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='owl/owl.carousel.min.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='owl/owl.theme.default.min.css') }}">
+        <script src="{{ url_for('static', filename='owl/owl.carousel.min.js')}}"></script>
+    </head>
 <body>
     <header>
         <div class="wrapper">
@@ -30,13 +30,13 @@
                 </nav>
             </div>
         <!-- Тут нужно сделать при нажатии выход из профиля-->
-       <a class="sign" target="_blank"><div class="header logo exit"><img src="{{ url_for('static', filename='css//images/exit.png')}}" style="width: 100px; height: 100px; margin-left: 50px; " alt="profile"></div></a>
+       <a href="/logout" class="sign" target="_blank"><div class="header logo exit"><img src="{{ url_for('static', filename='css//images/exit.png')}}" style="width: 100px; height: 100px; margin-left: 50px; " alt="profile"></div></a>
     </div>
     </header>
 
 
       <!-- Unnamed (Dynamic Panel) -->
-    <div class="title">Selection of cats and dogs</div>  
+    <div class="wrapper"><div class="title">Selection of cats and dogs</div></div>
     <div class="background">
       <div class="owl-carousel owl-theme carousel">
             <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/4.jpg')}}" alt="Cat"><span class="siber">Siberian Cat</span></div>
@@ -56,28 +56,27 @@
 <div class="historyReq">
     <div class="histName"><span class="catspan">Cats</span><span class="dogspan">Dogs</span></div>
 <div class="overflow cats">
- <!--Отсюда копировать-->
- {%for i in range(0, len)%} 
+ {% for req in cats_requests %} 
 <div class="part">
-    <img class="histreq" src="{{PathImg[i]}}">
+    <img class="histreq" src="/static/user_images/{{ req.image_path }}">
 </div>
 <div class="part">
-    <div class="breed1">{{Name1[i]}}</div>
-    <div class="breed2">{{Name2[i]}}</div>
+    <div class="breed1">{{ req.breed1 }}</div>
+    <div class="breed2">{{ req.breed2 }}</div>
 </div>
 {%endfor%}
 </div>
 
 <div class="overflow dogs">
-<!--Сюда цикл для собак-->
+{% for req in dogs_requests %} 
 <div class="part">
-    <img class="histreq" src="ПЕРЕМЕННАЯ_ПУТЬ_ДЛЯ_СОБАК">
+    <img class="histreq" src="/static/user_images/{{ req.image_path }}">
 </div>
 <div class="part">
-    <div class="breed1">ПЕРЕМЕННАЯ_ИМЯ1_ДЛЯ_СОБАК</div>
-    <div class="breed2">ПЕРЕМЕННАЯ_ИМЯ2_ДЛЯ_СОБАК</div>
+    <div class="breed1">{{ req.breed1 }}</div>
+    <div class="breed2">{{ req.breed2 }}</div>
 </div>
-<!--До сюда -->
+{%endfor%}
 </div>
 
 

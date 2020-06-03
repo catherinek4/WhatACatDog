@@ -1,41 +1,32 @@
-from flask_login import (
-    LoginManager,
-    current_user,
-    login_required,
-    login_user,
-    logout_user,
-)
-from request import Request
-from user import User
-import signIn
-import signUp
-import googleAuth
-import csv
-from werkzeug.utils import secure_filename
-from flask import Flask, request, redirect, url_for, render_template
 import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+from flask import Flask, request, redirect, url_for, render_template, session
+from werkzeug.utils import secure_filename
+import csv
+import sqlite3
 
-UPLOAD_FOLDER = 'user_images'
+#Internal imports
+import googleAuth
+import signUp
+import signIn
+from user import User
+from request import Request
+from db import init_db_command
 
 app = Flask(__name__)
-app.config["IMAGE_UPLOADS"] = UPLOAD_FOLDER
+app.config["IMAGE_UPLOADS"] = 'static\\user_images'
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
-# User session management setup
-# https://flask-login.readthedocs.io/en/latest
-login_manager = LoginManager()
-login_manager.init_app(app)
 
-
-@login_manager.user_loader
-def load_user(user_email):
-    return User.getByEmail(user_email)
-
+# Naive database setup
+try:
+    init_db_command()
+except sqlite3.OperationalError:
+    # Assume it's already been created
+    pass
 
 @app.route('/')
 def home():
     return render_template('main.html')
-
 
 #################### ЕСЛИ ПОСМОТРЕТЬ КАК ОНО РАБОТАЕТ И ЗАПУСТИТЬ У СЕБЯ ########################
 @app.route('/', methods=["GET", "POST"])
@@ -43,9 +34,10 @@ def upload_image():
     if request.method == "POST":
         if request.files:
             image_from_user = request.files["image"]
-            image_from_user.save(os.path.join(
-                app.config["IMAGE_UPLOADS"], image_from_user.filename))
-            src = './user_images/' + str(image_from_user.filename)
+            image_from_user.save(os.path.join(app.config["IMAGE_UPLOADS"], image_from_user.filename))
+            
+            src = os.path.join(app.config["IMAGE_UPLOADS"], image_from_user.filename)
+            value = "cats"
             with open('data/csv/cats.csv') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
@@ -70,8 +62,9 @@ def upload_image():
                         history2 = row['history']
                         img_breed2 = f"cats/ragdoll.jpg"
                         break
-    return render_template('result.html', name=name, weight=weight, life=life, country=country, height=height, colors=colors, history=history, name2=name2, weight2=weight2, life2=life2, country2=country2, height2=height2, colors2=colors2, history2=history2, img_breed2=img_breed2, img_breed1=img_breed1)
-
+            create_request(value, str(image_from_user.filename), name, name2)
+            return render_template('result.html', name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
+    return render_template('main.html')
 
 ######################### ТОЛЬКО ЕСЛИ ЕСТЬ TENSORFLOW + CUDA #############################
 # import numpy as np
@@ -94,9 +87,8 @@ def upload_image():
 #     if request.method == "POST":
 #         if request.files:
 #             image_from_user = request.files["image"]
-#             image_from_user.save(os.path.join(
-#                 app.config["IMAGE_UPLOADS"], image_from_user.filename))
-#             src = './user_images/' + str(image_from_user.filename)
+#             image_from_user.save(os.path.join(app.config["IMAGE_UPLOADS"], image_from_user.filename))            
+#             src = os.path.join(app.config["IMAGE_UPLOADS"], image_from_user.filename)
 #             img1 = image.load_img(src, target_size=(64, 64))
 #             img = image.img_to_array(img1)
 #             img = img/255
@@ -123,12 +115,12 @@ def upload_image():
 #                 value = 'cats'
 #                 prediction_cat = 1.0-prediction[0, 0]
 #                 prediction = classifier_cat.predict(img, batch_size=None, steps=1)
-
+                
 #                 breed = cats[np.argmax(prediction[0])]
 #                 prediction_breed = prediction[0][np.argmax(prediction[0])] * 100
 #                 prediction_breed = "{:5.3f}".format(prediction_breed)
 #                 firts_breed_index = np.argmax(prediction[0])
-
+                
 #                 arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
 #                 cats2 = np.delete(cats, np.argmax(prediction[0]), axis=None)
 
@@ -136,9 +128,9 @@ def upload_image():
 #                 prediction_breed2 = arr2[np.argmax(arr2)] * 100
 #                 prediction_breed2 = "{:5.3f}".format(prediction_breed2)
 #                 second_breed_index = np.argmax(arr2)
-
+            
 #             path_to_csv = 'data/csv/' + value + '.csv'
-
+          
 #             with open(path_to_csv, encoding='utf-8', errors='replace') as csvfile:
 #                 reader = csv.DictReader(csvfile)
 #                 for row in reader:
@@ -163,58 +155,64 @@ def upload_image():
 #                         history2 = row['history']
 #                         img_breed2 = f"{value}/{breed2}.jpg"
 #                         break
-#             return render_template('result.html',prediction_breed = prediction_breed, prediction_breed2 = prediction_breed2, name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
-#                         #img_breed2 = 'cats/'+str(i)+'.jpg'
-    # break
-    #create_request(src, name, name2)
-    # return render_template('result.html', name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
+#             create_request(value, str(image_from_user.filename), name, name2)           
+#             return render_template('result.html',prediction_breed = prediction_breed, prediction_breed2 = prediction_breed2, name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)           
+#     return render_template("main.html")
 
-def create_request(image, breed1, breed2):
+def create_request(animal_type, image_path, breed1, breed2):
     user_id = None
-    if not current_user.is_authenticated:
-        user_id = current_user.id
-    return Request.create(user_id, image, breed1, breed2)
-
-
-@app.route('/header/')
+    if 'current_user' in session:
+        user_id = session['current_user']
+    return Request.create(user_id, animal_type, image_path, breed1, breed2)
+    
+@app.route('/header')
 def show_header():
     return render_template('header.html')
 
-
-@app.route('/signUp/', methods=["GET", "POST"])
+@app.route('/signUp', methods=["POST", "GET"])
 def _signUp():
-    name = request.form['fn']
-    email = request.form['email']
-    password = request.form['password']
-    return signUp.login(name, email, password)
+    if not 'current_user' in session:
+        name = request.form['fn']
+        email = request.form['email']
+        password = request.form['password']
+        user = signUp.login(name, email, password)
+        session['current_user'] = user.id
+    return redirect(url_for("show_profile"))
 
-
-@app.route('/signIn/', methods=["GET", "POST"])
+@app.route('/signIn', methods=["POST", "GET"])
 def _signIn():
-    email = request.form['email']
-    password = request.form['password']
-    return signIn.login(email, password)
-
+    if not 'current_user' in session:
+        email = request.form['email']
+        password = request.form['password']
+        user = signIn.login(email, password)
+        session['current_user'] = user.id
+    return redirect(url_for("show_profile"))
 
 @app.route('/signGoogle')
 def _signGoogle():
     return googleAuth.login()
 
-
 @app.route("/signGoogle/callback")
 def callback():
-    return googleAuth.callback()
+    user = googleAuth.callback()
+    session['current_user'] = user.id
+    return redirect(url_for("show_profile"))
 
+@app.route("/logout")
+def logout():
+    session.pop('current_user')
+    return render_template("main.html")
 
-@app.route('/profile/')
+@app.route('/profile')
 def show_profile():
-    Name1 = ["British Shorthair Cat", "Scottish Straight Cat"]
-    Name2 = ["British Longhair Cat", "Persian Cat"]
-    PathImg = [url_for('static', filename='css//images/2.jpg'),
-               url_for('static', filename='css//images/3.jpg')]
-    return render_template("profile.html", len=len(PathImg), Name1=Name1,  Name2=Name2,  PathImg=PathImg)
+    if 'current_user' in session:
+        cats_requests = Request.get(session['current_user'], "cats")
+        dogs_requests = Request.get(session['current_user'], "dogs")
+        return render_template("profile.html", cats_requests = cats_requests, dogs_requests = dogs_requests)
+    return render_template("main.html")
 
-
+     
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=4826)
-    # app.run(ssl_context="adhoc")
+    #app.run(debug=True, host='0.0.0.0', port=4826)
+    #app.run(ssl_context="adhoc")
+    app.run(debug=True)
