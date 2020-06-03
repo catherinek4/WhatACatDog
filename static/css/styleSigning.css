@@ -1,7 +1,6 @@
 
 #submit{
   border-width:0px;
-position:absolute;
 width:300px;
 height:38px;
 background-color:rgba(129, 211, 248, 0.819607843137255);
@@ -15,7 +14,7 @@ font-weight:400;
 font-style:normal;
 font-size:18px;
 color:#FFFFFF;
-  margin-top: 3%;
+margin-top:50px;
 }
 #submit:hover{
 
@@ -27,9 +26,9 @@ background-color:rgba(186, 234, 255, 0.996078431372549);
 position:   relative; 
 margin-left: auto;
 margin-right: auto;
-  margin-top: 5%;
+  margin-top: 10px;
 width:499px;
-height:533px;
+height:560px;
 background-color:#F7F6F6;
 box-sizing:border-box;
 border-width:1px;
@@ -43,8 +42,8 @@ width: 25px;
 height: 25px;
 cursor: pointer;
 position:  relative;  
-margin-left: 430px;
-margin-top:  30px;
+margin-left: 460px;
+margin-top:  5px;
 }
 .close-popup:before{
 content:"";
@@ -114,7 +113,7 @@ margin-top: 30px;
   margin-left: 40px;
 }
 #pep{
-  margin-top: 100px;
+  margin-top: 30px;
   margin-left: 90px;
 }
 #api{
@@ -147,9 +146,9 @@ color: #C68CDD;
 #frmIn{
 margin-left: auto;
 margin-right: auto;
-margin-top:  5%;
+margin-top:  10px;
 width:499px;
-height:510px;
+height:550px;
 background-color:#F7F6F6;
 box-sizing:border-box;
 border-width:1px;
@@ -179,7 +178,6 @@ color:#20B3F2;
 
 #submit2{
   border-width:0px;
-position:absolute;
 width:300px;
 height:38px;
 background-color:rgba(129, 211, 248, 0.819607843137255);
@@ -193,7 +191,7 @@ font-weight:400;
 font-style:normal;
 font-size:18px;
 color:#FFFFFF;
-  margin-top: 1%;
+  margin-top: 20px;
 }
 #submit2:hover{
 
