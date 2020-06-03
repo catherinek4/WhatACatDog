@@ -7,8 +7,13 @@ Our task was to recognize a breed of a cat or a dog. We used 2 datasets for dist
 <div>
   <h3>Recognition Model</h3>
   Our Neural Network receives an input (one single vector with 64*64 values) and transforms it using a series of hidden layers. The last layer is a fully-connected layer and is called the output layer. For making a Recongnition Model we took into account Convolutional Neural Networks because of the fact it has a sensible architecture and each neuron is arranged in 3 dimensions: width, height, and depth.
-</br>
-sofeo rijfgeoir
+We used 4 main types of layers to build a model: Convolutional, Pooling, Fully-Connected Layer, and Flattening Layers.
+</br></br>
+<h4>Convolutional Layer and ReLU function</h4>
+This is the main layer because it is used to reduce the size of an image and make the process of breeds recognition easier and faster.
+If an image is too big, some of the main features are lost because the image is compressed to the shape of (64, 64) pixels. But for preventing such loss of image information we used feature maps. As a result, each cat or dog has a unique map feature location for identifying it. 
 </div>
+
+
 
 
