@@ -82,10 +82,10 @@ from tensorflow.keras.models import load_model
 classifier = load_model('resources/dogcat_model_bak.h5')
 classifier_cat = load_model('resources/cat_model_bak.h5')
 classifier_dog = load_model('resources/dog_model_bak.h5')
-cats = ["Abyssinian", "Bengal", "Birman", "Bombay", "British Shorthair", "Egyptian Mau",
-"Maine Coon", "Persian", "Ragdoll", "Russian Blue", "Siamese", "Sphynx"]
-dogs = ['Tibetan_terrier', 'Border_collie', 'dhole', 'clumber', 'Pembroke', 'Kerry_blue_terrier', 'Tibetan_mastiff', 'Bedlington_terrier', 'Walker_hound', 'black-and-tan_coonhound', 'malamute', 'Cardigan', 'schipperke', 'German_short-haired_pointer', 'golden_retriever', 'Afghan_hound', 'otterhound', 'African_hunting_dog', 'Italian_greyhound', 'Great_Dane', 'miniature_schnauzer', 'Pomeranian', 'Border_terrier', 'Airedale', 'Chihuahua', 'kuvasz', 'Chesapeake_Bay_retriever', 'miniature_pinscher', 'Norwich_terrier', 'French_bulldog', 'Ibizan_hound', 'Shih-Tzu', 'EntleBucher', 'Samoyed', 'vizsla', 'cocker_spaniel', 'Blenheim_spaniel', 'Rottweiler', 'whippet', 'groenendael', 'Bouvier_des_Flandres', 'Australian_terrier', 'redbone', 'Sussex_spaniel', 'basset', 'standard_poodle', 'flat-coated_retriever', 'chow', 'basenji', 'American_Staffordshire_terrier', 'Appenzeller', 'Staffordshire_bullterrier', 'soft-coated_wheaten_terrier', 'Irish_setter', 'silky_terrier', 'Rhodesian_ridgeback', 'Weimaraner', 'Eskimo_dog', 'briard', 'affenpinscher',
- 'Scottish_deerhound', 'Yorkshire_terrier', 'pug', 'Norwegian_elkhound', 'bloodhound', 'bull_mastiff', 'Old_English_sheepdog', 'Labrador_retriever', 'Saluki', 'giant_schnauzer', 'Japanese_spaniel', 'Lhasa', 'Norfolk_terrier', 'papillon', 'Irish_terrier', 'Brabancon_griffon', 'Irish_wolfhound', 'boxer', 'malinois', 'collie', 'standard_schnauzer', 'German_shepherd', 'beagle', 'English_setter', 'toy_poodle', 'Sealyham_terrier', 'West_Highland_white_terrier', 'Greater_Swiss_Mountain_dog', 'dingo', 'English_springer', 'Brittany_spaniel', 'Maltese_dog', 'curly-coated_retriever', 'Doberman', 'Shetland_sheepdog', 'Lakeland_terrier', 'Mexican_hairless', 'Saint_Bernard', 'English_foxhound', 'borzoi', 'Leonberg', 'Welsh_springer_spaniel', 'wire-haired_fox_terrier', 'miniature_poodle', 'Newfoundland', 'toy_terrier', 'Irish_water_spaniel', 'Gordon_setter', 'Great_Pyrenees', 'Scotch_terrier', 'Siberian_husky', 'komondor', 'bluetick', 'cairn', 'Pekinese', 'Boston_bull', 'Dandie_Dinmont', 'kelpie', 'Bernese_mountain_dog', 'keeshond']
+cats = ["abyssinian", "bengal", "birman", "bombay", "british_shorthair", "egyptian_mau",
+"maine_coon", "persian", "ragdoll", "russian_blue", "siamese", "sphynx"]
+dogs = ['tibetan_terrier', 'border_collie', 'dhole', 'clumber', 'pembroke', 'kerry_blue_terrier', 'tibetan_mastiff', 'bedlington_terrier', 'walker_hound', 'black-and-tan_coonhound', 'malamute', 'cardigan', 'schipperke', 'german_short-haired_pointer', 'golden_retriever', 'afghan_hound', 'otterhound', 'african_hunting_dog', 'italian_greyhound', 'great_dane', 'miniature_schnauzer', 'pomeranian', 'border_terrier', 'airedale', 'chihuahua', 'kuvasz', 'chesapeake_bay_retriever', 'miniature_pinscher', 'norwich_terrier', 'french_bulldog', 'ibizan_hound', 'shih-tzu', 'entlebucher', 'samoyed', 'vizsla', 'cocker_spaniel', 'blenheim_spaniel', 'rottweiler', 'whippet', 'groenendael', 'bouvier_des_flandres', 'australian_terrier', 'redbone', 'sussex_spaniel', 'basset', 'standard_poodle', 'flat-coated_retriever', 'chow', 'basenji', 'american_Staffordshire_terrier', 'appenzeller', 'staffordshire_bullterrier', 'soft-coated_wheaten_terrier', 'irish_setter', 'silky_terrier', 'rhodesian_ridgeback', 'weimaraner', 'eskimo_dog', 'briard', 'affenpinscher',
+ 'scottish_deerhound', 'yorkshire_terrier', 'pug', 'norwegian_elkhound', 'bloodhound', 'bull_mastiff', 'old_english_sheepdog', 'labrador_retriever', 'saluki', 'giant_schnauzer', 'japanese_spaniel', 'lhasa', 'norfolk_terrier', 'papillon', 'irish_terrier', 'brabancon_griffon', 'irish_wolfhound', 'boxer', 'malinois', 'collie', 'standard_schnauzer', 'german_shepherd', 'beagle', 'english_setter', 'toy_poodle', 'sealyham_terrier', 'west_Highland_white_terrier', 'greater_swiss_mountain_dog', 'dingo', 'english_springer', 'brittany_spaniel', 'maltese_dog', 'curly-coated_retriever', 'doberman', 'shetland_sheepdog', 'lakeland_terrier', 'mexican_hairless', 'saint_bernard', 'english_foxhound', 'borzoi', 'leonberg', 'welsh_springer_spaniel', 'wire-haired_fox_terrier', 'miniature_poodle', 'newfoundland', 'toy_terrier', 'irish_water_spaniel', 'gordon_setter', 'great_pyrenees', 'scotch_terrier', 'siberian_husky', 'komondor', 'bluetick', 'cairn', 'pekinese', 'boston_bull', 'dandie_dinmont', 'kelpie', 'bernese_mountain_dog', 'keeshond']
 
 @app.route('/', methods=["GET", "POST"])
 def upload_image():
@@ -138,7 +138,7 @@ def upload_image():
             with open(path_to_csv, encoding='utf-8', errors='replace') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
-                    if row['name'] == breed:
+                    if row['breed'] == breed:
                         name = row['name']
                         weight = row['weight']
                         life = row['life_exp']
@@ -146,10 +146,10 @@ def upload_image():
                         height = row['height']
                         colors = row['colors']
                         history = row['history']
-                        img_breed1 = value+'/'+str(breed)+'.jpg'
+                        img_breed1 = f"{value}/{breed}.jpg"
                         break
                 for row in reader:
-                    if row['name'] == breed2:
+                    if row['breed'] == breed2:
                         name2 = row['name']
                         weight2 = row['weight']
                         life2 = row['life_exp']
@@ -157,7 +157,7 @@ def upload_image():
                         height2 = row['height']
                         colors2 = row['colors']
                         history2 = row['history']
-                        img_breed2 = value+'/'+str(breed2)+'.jpg'
+                        img_breed2 = f"{value}/{breed2}.jpg"
                         break           
             return render_template('result.html',prediction_breed = prediction_breed, prediction_breed2 = prediction_breed2, name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)           
                         #img_breed2 = 'cats/'+str(i)+'.jpg'
