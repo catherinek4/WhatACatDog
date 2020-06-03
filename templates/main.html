@@ -28,10 +28,14 @@
                     </ul>
                 </nav>
             </div>
+            {% if 'current_user' in session %}
+            <a href="profile.html" target="_blank"><div class="header logo profile"><img src="images/proflog.png" style="width: 100px; height: 108px; margin-left: 50px; " alt="profile"></div></a>
+           {% else %}
             <a href="#" id="profile" class="sign">
                 <div class="header logo profile"><img src="{{ url_for('static', filename='css//images/prof.png') }}"
-                        style="width: 100px; height: 108px; margin-left: 50px; " alt="profile"></div>
+                        style="width: 100px; height: 108px; margin-left: 50px; " alt="profile"></div>         
             </a>
+            {% endif %}
         </div>
     </header>
     <div id="scroller" class="arrow">
