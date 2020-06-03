@@ -1,35 +1,29 @@
 import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-from flask import Flask, request, redirect, url_for, render_template
+from flask import Flask, request, redirect, url_for, render_template, session
 from werkzeug.utils import secure_filename
 import csv
+import sqlite3
 
+#Internal imports
 import googleAuth
 import signUp
 import signIn
 from user import User
 from request import Request
-from flask_login import (
-    LoginManager,
-    current_user,
-    login_required,
-    login_user,
-    logout_user,
-)
-UPLOAD_FOLDER = 'user_images'
+from db import init_db_command
 
 app = Flask(__name__)
+UPLOAD_FOLDER = 'user_images'
 app.config["IMAGE_UPLOADS"] = UPLOAD_FOLDER
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
-# User session management setup
-# https://flask-login.readthedocs.io/en/latest
-login_manager = LoginManager()
-login_manager.init_app(app)
 
-@login_manager.user_loader
-def load_user(user_email):
-    return User.getByEmail(user_email)
-
+# Naive database setup
+try:
+    init_db_command()
+except sqlite3.OperationalError:
+    # Assume it's already been created
+    pass
 
 @app.route('/')
 def home():
@@ -67,7 +61,8 @@ def upload_image():
                         colors2 = row['colors']
                         history2 = row['history']
                         img_breed2 = f"cats/ragdoll.jpg"
-                        break            
+                        break
+            create_request(src, name, name2)
     return render_template('result.html', name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
 
 
@@ -169,26 +164,32 @@ def upload_image():
 
 def create_request(image, breed1, breed2):
     user_id = None
-    if not current_user.is_authenticated:
-	    user_id = current_user.id
+    if 'current_user' in session:
+        user_id = session['current_user']
     return Request.create(user_id, image, breed1, breed2)
     
-@app.route('/header/')
+@app.route('/header')
 def show_header():
     return render_template('header.html')
 
-@app.route('/signUp/', methods=["GET", "POST"])
+@app.route('/signUp', methods=["POST", "GET"])
 def _signUp():
-    name = request.form['fn']
-    email = request.form['email']
-    password = request.form['password']
-    return signUp.login(name, email, password)
+    if not 'current_user' in session:
+        name = request.form['fn']
+        email = request.form['email']
+        password = request.form['password']
+        user = signUp.login(name, email, password)
+        session['current_user'] = user.id
+    return render_template('main.html')
 
-@app.route('/signIn/', methods=["GET", "POST"])
+@app.route('/signIn', methods=["POST", "GET"])
 def _signIn():
-    email = request.form['email']
-    password = request.form['password']
-    return signIn.login(email, password)
+    if not 'current_user' in session:
+        email = request.form['email']
+        password = request.form['password']
+        user = signIn.login(email, password)
+        session['current_user'] = user.id
+    return render_template('main.html')
 
 @app.route('/signGoogle')
 def _signGoogle():
@@ -196,8 +197,16 @@ def _signGoogle():
 
 @app.route("/signGoogle/callback")
 def callback():
-    return googleAuth.callback()
+    user = googleAuth.callback()
+    session['current_user'] = user.id
+    return render_template('main.html')
+
+@app.route("/logout")
+def logout():
+    session.pop('current_user')
+    return render_template('main.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=4826)
+    #app.run(debug=True, host='0.0.0.0', port=4826)
     #app.run(ssl_context="adhoc")
+    app.run(debug=True)
