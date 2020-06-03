@@ -3,7 +3,6 @@
 <head>
     <title> WhatACatDog </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styleSigning.css') }}">
 </head>
@@ -76,7 +75,7 @@
                 <!-- <button id='btnClick' onclick="document.getElementById('getFile').click()">Click here to upload an
                     image</button> -->
                 <div class="fl_upld">
-                    <div id="error"></div>
+                    <div id="error" style="width: 500px; color:red;"></div>
                     <label class="fl_upld_label"><input class="fl_inp" id="image" type="file" name="image" style="display: none;">
                         <div id="fl_nm">Click here to upload an image</div>
                     </label>

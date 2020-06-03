@@ -368,6 +368,12 @@ margin-left: 5px;
   height:40px;
     margin-top: -40px;
 }
+#rec:active, #rec:focus {
+  outline: none;
+}
+#rec::-moz-focus-inner {
+  border: 0;
+}
 #rec:hover{
     cursor: pointer;
     border-width:0px;
