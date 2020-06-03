@@ -35,7 +35,7 @@ def load_user(user_email):
 def home():
     return render_template('main.html')
 
-#################### ЕСЛИ ПОСМОТРЕТЬ КАК ОНО РАБОТАЕТ И ЗАПУСТИТЬ У СЕБЯ ########################
+################### ЕСЛИ ПОСМОТРЕТЬ КАК ОНО РАБОТАЕТ И ЗАПУСТИТЬ У СЕБЯ ########################
 @app.route('/', methods=["GET", "POST"])
 def upload_image():
     if request.method == "POST":
