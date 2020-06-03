@@ -9,8 +9,37 @@
 
 <body>
     <header>
-        <div id="base"></div>
-        <iframe src="{{ url_for('show_header') }}"></iframe>
+        <div class="wrapper">
+            <div class="header logo"><a href="#"><img src="{{ url_for('static', filename='css//images/logo.png.png') }}"
+                        alt="logo"></a></div>
+            <div class="headwrapper">
+                <div class="header name">
+                    WhatACat?Dog
+                </div>
+                <nav>
+                    <ul class="topmenu">
+                        <li class="hover" style="padding-right: 95px;"><a target="_top" href="{{ url_for('home') }}"
+                                class="hov">HOME
+                                PAGE</a></li>
+                        <li class="hover"><span class=" partition"></span><a target="_top" href="{{ url_for('home', _anchor='htu') }}"
+                                class="active hover">HOW TO USE</a></li>
+                        <li class="hover" style="padding-left: 95px"><span class=" partition"></span><a target="_top"
+                                href="main.html#about" class="hov">ABOUT US</a></li>
+                    </ul>
+                </nav>
+            </div>
+            {% if 'current_user' in session %}
+            <a href="{{ url_for('show_profile') }}" target="_blank">
+                <div class="header logo profile"><img src="{{ url_for('static', filename='css//images/proflog.png') }}"
+                        style="width: 100px; height: 108px; margin-left: 50px; " alt="profile"></div>
+            </a>
+            {% else %}
+            <a href="#" id="profile" class="sign">
+                <div class="header logo profile"><img src="{{ url_for('static', filename='css//images/prof.png') }}"
+                        style="width: 100px; height: 108px; margin-left: 50px; " alt="profile"></div>
+            </a>
+            {% endif %}
+        </div>
     </header>
     <!-- Result part -->
     <div>
@@ -93,4 +122,48 @@
             document.body.classList.remove('loaded_hiding');
         }, 1000000);
     }
+</script>
+<script>
+    $('.sign').click(function() {
+    $('.js-overlay-campaign1').fadeOut();
+    $('body').css('filter','none');
+    $('.js-overlay-campaign').css('filter','none');
+    $('.js-overlay-campaign').fadeIn();
+    $('.js-overlay-campaign').addClass('disabled');
+  });
+
+  $('.js-close-campaign').click(function() {
+    $('.js-overlay-campaign').fadeOut();
+    $('body').css('filter','none');
+  });
+
+  $(document).mouseup(function (e) {
+    var popup = $('.js-popup-campaign');
+    if (e.target!=popup[0]&&popup.has(e.target).lenght === 0){
+      $('.js-overlay-campaign').fadeOut();
+      
+    }
+  });
+</script>
+ <script>
+    $('.signUp').click(function() {
+    $('.js-overlay-campaign').fadeOut();
+    $('body').css('filter','none');
+    $('.js-overlay-campaign1').css('filter','none');
+    $('.js-overlay-campaign1').fadeIn();
+    $('.js-overlay-campaign1').addClass('disabled');
+  });
+
+  $('.js-close-campaign1').click(function() {
+    $('.js-overlay-campaign1').fadeOut();
+    $('body').css('filter','none');
+  });
+
+  $(document).mouseup(function (e) {
+    var popup = $('.js-popup-campaign1');
+    if (e.target!=popup[0]&&popup.has(e.target).lenght === 0){
+      $('.js-overlay-campaign1').fadeOut();
+      
+    }
+  });
 </script>
