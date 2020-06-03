@@ -3,6 +3,7 @@
 <head>
     <title> WhatACatDog </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styleSigning.css') }}">
 </head>
@@ -29,11 +30,14 @@
                 </nav>
             </div>
             {% if 'current_user' in session %}
-            <a href="profile.html" target="_blank"><div class="header logo profile"><img src="images/proflog.png" style="width: 100px; height: 108px; margin-left: 50px; " alt="profile"></div></a>
-           {% else %}
+            <a href="profile.html" target="_blank">
+                <div class="header logo profile"><img src="images/proflog.png"
+                        style="width: 100px; height: 108px; margin-left: 50px; " alt="profile"></div>
+            </a>
+            {% else %}
             <a href="#" id="profile" class="sign">
                 <div class="header logo profile"><img src="{{ url_for('static', filename='css//images/prof.png') }}"
-                        style="width: 100px; height: 108px; margin-left: 50px; " alt="profile"></div>         
+                        style="width: 100px; height: 108px; margin-left: 50px; " alt="profile"></div>
             </a>
             {% endif %}
         </div>
@@ -80,7 +84,8 @@
                     image</button> -->
                 <div class="fl_upld">
                     <div id="error" style="width: 500px; color:red;"></div>
-                    <label class="fl_upld_label"><input class="fl_inp" id="image" type="file" name="image" style="display: none;">
+                    <label class="fl_upld_label"><input class="fl_inp" id="image" type="file" name="image"
+                            style="display: none;">
                         <div id="fl_nm">Click here to upload an image</div>
                     </label>
                 </div>
@@ -125,12 +130,13 @@
                 <form action="/signIn" method="post" id='formaIn'>
                     <span>{{ errorSignIn }}</span>
                     <h2 id='head2'>Sign In</h2><a href="{{ url_for('show_profile') }}">Prof</a>
-                    <label for="Email" class="floatLabel" id='l2'>Email Address</label>
+                    <div id="sign_in_error"></div>
+                    <label for="sign_in_email" class="floatLabel" id='l2'>Email Address</label>
                     <br>
-                    <input id="Email" name="email" type="email" class="inp" required>
-                    <label for="password" class="floatLabel" id='l3'>Password</label>
+                    <input id="sign_in_email" name="email" class="inp">
+                    <label for="sign_in_password" class="floatLabel" id='l3'>Password</label>
                     <br>
-                    <input id="Password" name="password" type="password" class="inp" required minlength="3">
+                    <input id="sign_in_password" name="password" type="password" class="inp">
                     <div>
                         <input type="checkbox" id="remPas" name="rp">
                         <label for="rp" id='lbl'> Remember me</label>
@@ -162,17 +168,16 @@
                 <form action="/signUp" method="post" id='forma'>
                     <h2 id='head'>Create an account</h2>
                     <span>{{ errorSignUp }}</span>
+                    <div id="sign_up_error"></div>
                     <label for="FN" class="floatLabel" id='l1'>Full name:</label>
                     <br>
-                    <input id="FN" name="fn" type="text" class="inp" placeholder="ex. Ivanov Ivan" minlength="5">
-                    <label for="Email" class="floatLabel" id='l2'>Email:</label>
+                    <input id="FN" name="fn" type="text" class="inp" placeholder="ex. Ivanov Ivan">
+                    <label for="sign_up_email" class="floatLabel" id='l2'>Email:</label>
                     <br>
-                    <input id="email" name="email" type="text" class="inp" placeholder="ex. ivanovivan@gmail.com"
-                        minlength="5">
-                    <label for="password" class="floatLabel" id='l3'>Password:</label>
+                    <input id="sign_up_email" name="email" class="inp" placeholder="ex. ivanovivan@gmail.com">
+                    <label for="sign_up_password" class="floatLabel" id='l3'>Password:</label>
                     <br>
-                    <input id="password" name="password" type="password" class="inp" placeholder="min. 6 characters"
-                        minlength="6">
+                    <input id="sign_up_password" name="password" type="password" class="inp" placeholder="min. 6 characters">
                     <input type="submit" value="Create your account" id="submit">
                     <p id='pep'> Or sign up using </p>
                     <ul id='api'>
@@ -265,7 +270,56 @@
             $("#fl_nm").html(filename);
         });
 
-        $("#imageForm").submit(function(e) {
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+
+        function isFn(fn) {
+            var regex = /^[a-z ,.'-]+$/i;
+            return regex.test(fn);
+        }
+
+        $("#formaIn").submit(function (e) {
+            let email = $("#sign_in_email").val();
+            let password = $("#sign_in_password").val();
+            $("#sign_in_error").empty()
+            if (isEmail(email) && password.length >= 6) {
+                return;
+            } 
+            if (!isEmail(email)) {
+                $("#sign_in_error").append("Please enter a valid email.<br/>");
+            }
+            if(password.length < 6) {
+                $("#sign_in_error").append("Password must contain at least 6 characters.");
+            }
+            $("#sign_in_error").show();
+            e.preventDefault();
+        })
+
+        $("#forma").submit(function(e) {
+            let email = $("#sign_up_email").val();
+            let password = $("#sign_up_password").val();
+            let fn = $("#FN").val(); 
+            $("#sign_up_error").empty()
+            if(isEmail(email) && password.length >= 6 && isFn(fn)) {
+                console.log("tyt");
+                return;
+            }
+            if (!isEmail(email)) {
+                $("#sign_up_error").append("Please enter a valid email.<br/>");
+            }
+            if(password.length < 6) {
+                $("#sign_up_error").append("Password must contain at least 6 characters.<br/>");
+            }
+            if(!isFn(fn)) {
+                $("#sign_up_error").append("First name must be correct e.x. Ivanov Ivanov.");
+            }
+            $("#sign_up_error").show();
+            e.preventDefault();
+        })
+
+        $("#imageForm").submit(function (e) {
             let image = document.getElementById('image');
             if (image.files[0]) {
                 let fn = image.files[0].name;
@@ -276,7 +330,7 @@
                         return;
                     }
                 }
-            } 
+            }
             $("#error").text("Please select a jpg or jpeg image no larger than 5 MB.").show().fadeOut(4000);
             e.preventDefault();
         })
