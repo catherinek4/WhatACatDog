@@ -72,8 +72,6 @@
         <p id="recogn"> Recognize the breed of a cat/dog </p>
         <div id='uploading1'>
             <form action="/" method="POST" enctype="multipart/form-data" id="imageForm">
-                <!-- <button id='btnClick' onclick="document.getElementById('getFile').click()">Click here to upload an
-                    image</button> -->
                 <div class="fl_upld">
                     <div id="error" style="width: 500px; color:red;"></div>
                     <label class="fl_upld_label"><input class="fl_inp" id="image" type="file" name="image" style="display: none;">
@@ -120,7 +118,7 @@
                 <div class="close-popup js-close-campaign"></div>
                 <form action="/signIn" method="post" id='formaIn'>
                     <span>{{ errorSignIn }}</span>
-                    <h2 id='head2'>Sign In</h2><a href="{{ url_for('show_profile') }}">Prof</a>
+                    <h2 id='head2'>Sign In</h2>
                     <label for="Email" class="floatLabel" id='l2'>Email Address</label>
                     <br>
                     <input id="Email" name="email" type="email" class="inp" required>

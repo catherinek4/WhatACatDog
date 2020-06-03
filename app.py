@@ -14,8 +14,7 @@ from request import Request
 from db import init_db_command
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'user_images'
-app.config["IMAGE_UPLOADS"] = UPLOAD_FOLDER
+app.config["IMAGE_UPLOADS"] = 'static\\user_images'
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 
 # Naive database setup
@@ -35,9 +34,10 @@ def upload_image():
     if request.method == "POST":
         if request.files:
             image_from_user = request.files["image"]
-            image_from_user.save(os.path.join(
-                app.config["IMAGE_UPLOADS"], image_from_user.filename))
-            src = './user_images/' + str(image_from_user.filename) 
+            image_from_user.save(os.path.join(app.config["IMAGE_UPLOADS"], image_from_user.filename))
+            
+            src = os.path.join(app.config["IMAGE_UPLOADS"], image_from_user.filename)
+            value = "cats"
             with open('data/csv/cats.csv') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
@@ -62,9 +62,9 @@ def upload_image():
                         history2 = row['history']
                         img_breed2 = f"cats/ragdoll.jpg"
                         break
-            create_request(src, name, name2)
-    return render_template('result.html', name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
-
+            create_request(value, str(image_from_user.filename), name, name2)
+            return render_template('result.html', name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
+    return render_template('main.html')
 
 ######################### ТОЛЬКО ЕСЛИ ЕСТЬ TENSORFLOW + CUDA #############################
 # import numpy as np
@@ -87,9 +87,8 @@ def upload_image():
 #     if request.method == "POST":
 #         if request.files:
 #             image_from_user = request.files["image"]
-#             image_from_user.save(os.path.join(
-#                 app.config["IMAGE_UPLOADS"], image_from_user.filename))
-#             src = './user_images/' + str(image_from_user.filename) 
+#             image_from_user.save(os.path.join(app.config["IMAGE_UPLOADS"], image_from_user.filename))            
+#             src = os.path.join(app.config["IMAGE_UPLOADS"], image_from_user.filename)
 #             img1 = image.load_img(src, target_size=(64, 64))
 #             img = image.img_to_array(img1)
 #             img = img/255
@@ -155,18 +154,16 @@ def upload_image():
 #                         colors2 = row['colors']
 #                         history2 = row['history']
 #                         img_breed2 = f"{value}/{breed2}.jpg"
-#                         break           
+#                         break
+#             create_request(value, str(image_from_user.filename), name, name2)           
 #             return render_template('result.html',prediction_breed = prediction_breed, prediction_breed2 = prediction_breed2, name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)           
-#                         #img_breed2 = 'cats/'+str(i)+'.jpg'
-                        #break
-    	    #create_request(src, name, name2)                
-    #return render_template('result.html', name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
+#     return render_template("main.html")
 
-def create_request(image, breed1, breed2):
+def create_request(animal_type, image_path, breed1, breed2):
     user_id = None
     if 'current_user' in session:
         user_id = session['current_user']
-    return Request.create(user_id, image, breed1, breed2)
+    return Request.create(user_id, animal_type, image_path, breed1, breed2)
     
 @app.route('/header')
 def show_header():
@@ -180,7 +177,7 @@ def _signUp():
         password = request.form['password']
         user = signUp.login(name, email, password)
         session['current_user'] = user.id
-    return render_template('main.html')
+    return redirect(url_for("show_profile"))
 
 @app.route('/signIn', methods=["POST", "GET"])
 def _signIn():
@@ -189,7 +186,7 @@ def _signIn():
         password = request.form['password']
         user = signIn.login(email, password)
         session['current_user'] = user.id
-    return render_template('main.html')
+    return redirect(url_for("show_profile"))
 
 @app.route('/signGoogle')
 def _signGoogle():
@@ -199,13 +196,22 @@ def _signGoogle():
 def callback():
     user = googleAuth.callback()
     session['current_user'] = user.id
-    return render_template('main.html')
+    return redirect(url_for("show_profile"))
 
 @app.route("/logout")
 def logout():
     session.pop('current_user')
-    return render_template('main.html')
+    return render_template("main.html")
 
+@app.route('/profile')
+def show_profile():
+    if 'current_user' in session:
+        cats_requests = Request.get(session['current_user'], "cats")
+        dogs_requests = Request.get(session['current_user'], "dogs")
+        return render_template("profile.html", cats_requests = cats_requests, dogs_requests = dogs_requests)
+    return render_template("main.html")
+
+     
 if __name__ == '__main__':
     #app.run(debug=True, host='0.0.0.0', port=4826)
     #app.run(ssl_context="adhoc")
