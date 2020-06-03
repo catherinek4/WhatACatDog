@@ -491,7 +491,7 @@ background-image: url(images/uphover.png);
 .telegram{
   position: fixed;
   left: 25px;
-  top: 45%;
+  margin-top: 50px;
   height: 100px;
   width: 100px;
   cursor: pointer;
