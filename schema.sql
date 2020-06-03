@@ -8,7 +8,8 @@ CREATE TABLE user(
 CREATE TABLE request(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id INTEGER,
-  image TEXT NOT NULL,
+  animal_type TEXT NOT NULL,
+  image_path TEXT NOT NULL,
   breed1 TEXT,
   breed2 TEXT
 );
