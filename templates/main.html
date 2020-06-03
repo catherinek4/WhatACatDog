@@ -120,7 +120,7 @@
                 <div class="close-popup js-close-campaign"></div>
                 <form action="/signIn" method="post" id='formaIn'>
                     <span>{{ errorSignIn }}</span>
-                    <h2 id='head2'>Sign In</h2>
+                    <h2 id='head2'>Sign In</h2><a href="{{ url_for('show_profile') }}">Prof</a>
                     <label for="Email" class="floatLabel" id='l2'>Email Address</label>
                     <br>
                     <input id="Email" name="email" type="email" class="inp" required>
