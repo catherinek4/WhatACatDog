@@ -30,7 +30,7 @@ classifier.add(Dense(output_dim=1, activation='sigmoid'))</br>
  
  <div>
   <h3>Telegram Bot</h3>
-  Our Telegram Bot is able to receive user images and send messages with a result of breed recognition. The process of 
+  Our Telegram Bot is able to receive user images and send messages with a result of breed recognition. The process of detection of a breed takes at least 3 seconds. A user can press one of three main buttons - Recognize, Statistics and Selection. Also, there is a list of commands that can help a user solve specific tasks or problems if he has some questions. The WhatACat?Dog Bot is able to send a message to your 'Hello' or 'Thanks' response as well as to some unknown words. The size of an input image should be more than 300*300 pixels, or it will not be processed otherwise. The information about users (user name, date, and time) is automatically saved in logs.txt file.
   </div>
  
 
