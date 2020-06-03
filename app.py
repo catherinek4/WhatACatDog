@@ -107,6 +107,7 @@ def upload_image():
 
                 breed = dogs[np.argmax(prediction[0])]
                 prediction_breed = prediction[0][np.argmax(prediction[0])] * 100
+                prediction_breed = "{:5.3f}".format(prediction_breed)
                 firts_breed_index = np.argmax(prediction[0])
 
                 arr2 = np.delete(prediction[0], np.argmax(prediction[0]), axis=None)
@@ -114,6 +115,7 @@ def upload_image():
 
                 breed2 = dogs2[np.argmax(arr2)]
                 prediction_breed2 = arr2[np.argmax(arr2)] * 100
+                prediction_breed2 = "{:5.3f}".format(prediction_breed2)
                 second_breed_index = np.argmax(arr2)
             else:
                 value = 'cats'
