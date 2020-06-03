@@ -90,6 +90,96 @@
             <span style="width: 25%"></span>
         </div>
     </div>
+    <!--Pop-Ups-->
+    <div class="overlay"></div>
+    <style type="text/css">
+        .overlay {
+            position: fixed;
+            display: none;
+            z-index: 1;
+            /* color with alpha channel */
+            background-color: rgba(0, 0, 0, 0.7);
+            /* 0.7 = 70% opacity */
+
+            /* stretch to screen edges */
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+    <div class="overlay js-overlay-campaign">
+        <div class="popup js-popup-campaign">
+            <div id='frmIn'>
+                <div class="close-popup js-close-campaign"></div>
+                <form action="/signIn" method="post" id='formaIn'>
+                    <span>{{ errorSignIn }}</span>
+                    <h2 id='head2'>Sign In</h2>
+                    <div id="sign_in_error"></div>
+                    <label for="sign_in_email" class="floatLabel" id='l2'>Email Address</label>
+                    <br>
+                    <input id="sign_in_email" name="email" class="inp">
+                    <label for="sign_in_password" class="floatLabel" id='l3'>Password</label>
+                    <br>
+                    <input id="sign_in_password" name="password" type="password" class="inp">
+                    <div>
+                        <input type="checkbox" id="remPas" name="rp">
+                        <label for="rp" id='lbl'> Remember me</label>
+                        <p id='forgot'><a href='' style="text-decoration: none;  color: #C68CDD;"> Forgot password?</a>
+                        </p>
+                    </div>
+                    <input type="submit" value="Submit" id="submit2">
+                    <p id='pep'> Or sign in using </p>
+                    <ul id='api'>
+
+                        <li id='ggl'>
+                            <a class="button" href="/signGoogle">
+                                <img src="{{ url_for('static', filename='css//images/u191.png') }}"
+                                    style="height: 20px; width: 20px; margin-bottom: -5px;">
+                                Google
+                            </a>
+                        </li>
+
+                    </ul>
+                    <p id='pep3'> Don`t have an account? <a id='sign' href="#" class="signUp"> Create</a> </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="overlay js-overlay-campaign1">
+        <div class="popup js-popup-campaign1">
+            <div id='frm'>
+                <div class="close-popup close-popup1 js-close-campaign1"></div>
+                <form action="/signUp" method="post" id='forma'>
+                    <h2 id='head'>Create an account</h2>
+                    <span>{{ errorSignUp }}</span>
+                    <div id="sign_up_error"></div>
+                    <label for="FN" class="floatLabel" id='l1'>Full name:</label>
+                    <br>
+                    <input id="FN" name="fn" type="text" class="inp" placeholder="ex. Ivanov Ivan">
+                    <label for="sign_up_email" class="floatLabel" id='l2'>Email:</label>
+                    <br>
+                    <input id="sign_up_email" name="email" class="inp" placeholder="ex. ivanovivan@gmail.com">
+                    <label for="sign_up_password" class="floatLabel" id='l3'>Password:</label>
+                    <br>
+                    <input id="sign_up_password" name="password" type="password" class="inp" placeholder="min. 6 characters">
+                    <input type="submit" value="Create your account" id="submit">
+                    <p id='pep'> Or sign up using </p>
+                    <ul id='api'>
+                        <li id='ggl'>
+                            <a class="button" href="/signGoogle">
+                                <img src="{{ url_for('static', filename='css//images/u191.png') }}"
+                                    style="height: 20px; width: 20px; margin-bottom: -5px;">
+                                Google
+                            </a>
+                        </li>
+                    </ul>
+                    <p id='pep2'> Already have an account? <a id='sign' class="sign" href='#'> Sign in</a> </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
