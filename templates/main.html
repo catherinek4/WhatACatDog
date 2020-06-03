@@ -3,6 +3,7 @@
 <head>
     <title> WhatACatDog </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styleSigning.css') }}">
 </head>
@@ -71,15 +72,16 @@
     <div>
         <p id="recogn"> Recognize the breed of a cat/dog </p>
         <div id='uploading1'>
-            <form action="/" method="POST" enctype="multipart/form-data">
+            <form action="/" method="POST" enctype="multipart/form-data" id="imageForm">
                 <!-- <button id='btnClick' onclick="document.getElementById('getFile').click()">Click here to upload an
                     image</button> -->
                 <div class="fl_upld">
-                    <label><input id="fl_inp" type='file' accept="image/jpg, image/jpeg" id="getFile" name="image">
+                    <div id="error"></div>
+                    <label class="fl_upld_label"><input class="fl_inp" id="image" type="file" name="image" style="display: none;">
                         <div id="fl_nm">Click here to upload an image</div>
                     </label>
                 </div>
-                <button id='rec' class="rec"> RECOGNIZE </button>
+                <button id='rec' class="rec" type="submit"> RECOGNIZE </button>
             </form>
         </div>
 
@@ -122,10 +124,10 @@
                     <h2 id='head2'>Sign In</h2>
                     <label for="Email" class="floatLabel" id='l2'>Email Address</label>
                     <br>
-                    <input id="Email" name="email" type="text" class="inp">
+                    <input id="Email" name="email" type="email" class="inp" required>
                     <label for="password" class="floatLabel" id='l3'>Password</label>
                     <br>
-                    <input id="Password" name="password" type="password" class="inp">
+                    <input id="Password" name="password" type="password" class="inp" required minlength="3">
                     <div>
                         <input type="checkbox" id="remPas" name="rp">
                         <label for="rp" id='lbl'> Remember me</label>
@@ -255,9 +257,22 @@
 </script>
 <script>
     $(document).ready(function () {
-        $("#fl_inp").change(function () {
+        $("#image").change(function () {
             var filename = $(this).val().replace(/.*\\/, "");
             $("#fl_nm").html(filename);
         });
+
+        $("#imageForm").submit(function(e) {
+            let image = document.getElementById('image');
+            if (image.files[0]) {
+                let fn = image.files[0].name;
+                fn = fn.substr(fn.lastIndexOf('.') + 1);
+                if (fn == "jpg" || fn == "jpeg") {
+                    return;
+                }
+            } 
+            $("#error").text("Please choose image jpg or jpeg").show().fadeOut(4000);
+            e.preventDefault();
+        })
     });
 </script>
