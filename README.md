@@ -7,8 +7,10 @@ Our task was to recognize a breed of a cat or a dog. We used 2 datasets for dist
 <div>
   <h3>Recognition Model</h3>
   Our Neural Network receives an input (one single vector with 64*64 values) and transforms it using a series of hidden layers. The last layer is a fully-connected layer and is called the output layer. For making a Recongnition Model we took into account Convolutional Neural Networks because of the fact it has a sensible architecture and each neuron is arranged in 3 dimensions: width, height, and depth. <br/>
-  For initializing the model we used:</br>
+  For initializing the model we applied the Sequential method:</br>
+  ```python
   classifier = Sequential()
+  ```
   </br>
 We used 4 main types of layers to build a model: Convolutional, Pooling, Flattening and Fully-Connected Layer Layers.
 </br>
