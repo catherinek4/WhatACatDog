@@ -8,19 +8,20 @@ Our task was to recognize a breed of a cat or a dog. We used 2 datasets for dist
   <h3>Recognition Model</h3>
   Our Neural Network receives an input (one single vector with 64*64 values) and transforms it using a series of hidden layers. The last layer is a fully-connected layer and is called the output layer. For making a Recongnition Model we took into account Convolutional Neural Networks because of the fact it has a sensible architecture and each neuron is arranged in 3 dimensions: width, height, and depth. <br/>
   For initializing the model we applied the Sequential method:</br>
-  ```ruby
   classifier = Sequential()
-  ```
   </br>
 We used 4 main types of layers to build a model: Convolutional, Pooling, Flattening and Fully-Connected Layer Layers.
 </br>
 <h4>Convolutional Layer</h4>
 This is the main layer because it is used to reduce the size of an image and make the process of breeds recognition easier and faster.
 If an image is too big, some of the main features are lost because the image is compressed to the shape of (64, 64) pixels. But for preventing such loss of image information we used feature maps. As a result, each cat or dog has a unique map feature location for identifying it.</br>
+classifier.add(Convolution2D(32, 3, 3, input_shape = (256, 256, 3), activation='relu'))</br>
 <h4>Pooling Layer</h4>
 Pooling enables us to classify breeds irrespective of the difference in lighting and the number of edges. Max pooling works to preserve the main features while also reducing the size of the image. </br>
+classifier.add(MaxPooling2D(pool_size=(2,2)))</br>
 <h4>Flattening Layer</h4>
 Once the pooled featured map is obtained, the next step is to flatten it. Flattening involves transforming the entire pooled feature map matrix into a single column which is then fed to the neural network for processing.</br>
+classifier.add(Flatten())</br>
 <h4> Fully-Connected Layer</h4>
 The output layer the Fully-Connected Layer and here we get the predicted classes. The information is passed through the network and the error of prediction is calculated. The error is then back propagated through the system to improve the prediction.
  </div>
