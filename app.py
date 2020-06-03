@@ -4,36 +4,37 @@ from flask import Flask, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 import csv
 
-import googleAuth
-import signUp
-import signIn
-from user import User
-from request import Request
-from flask_login import (
-    LoginManager,
-    current_user,
-    login_required,
-    login_user,
-    logout_user,
-)
+#import googleAuth
+#import signUp
+#import signIn
+#from user import User
+#from request import Request
+#from flask_login import (
+#    LoginManager,
+#    current_user,
+#    login_required,
+#    login_user,
+#    logout_user,
+#)
 UPLOAD_FOLDER = 'user_images'
 
 app = Flask(__name__)
 app.config["IMAGE_UPLOADS"] = UPLOAD_FOLDER
-app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
+#app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 # User session management setup
 # https://flask-login.readthedocs.io/en/latest
-login_manager = LoginManager()
-login_manager.init_app(app)
+#login_manager = LoginManager()
+#login_manager.init_app(app)
 
-@login_manager.user_loader
-def load_user(user_email):
-    return User.getByEmail(user_email)
+#@login_manager.user_loader
+#def load_user(user_email):
+#   return User.getByEmail(user_email)
 
 
 @app.route('/')
 def home():
     return render_template('main.html')
+
 
 #################### ЕСЛИ ПОСМОТРЕТЬ КАК ОНО РАБОТАЕТ И ЗАПУСТИТЬ У СЕБЯ ########################
 @app.route('/', methods=["GET", "POST"])
@@ -167,36 +168,43 @@ def upload_image():
     	    #create_request(src, name, name2)                
     #return render_template('result.html', name = name, weight = weight, life = life, country = country, height = height, colors = colors, history = history, name2 = name2, weight2 = weight2, life2 = life2, country2 = country2, height2 = height2, colors2 = colors2, history2 = history2, img_breed2 = img_breed2, img_breed1 = img_breed1)
 
-def create_request(image, breed1, breed2):
-    user_id = None
-    if not current_user.is_authenticated:
-	    user_id = current_user.id
-    return Request.create(user_id, image, breed1, breed2)
+#def create_request(image, breed1, breed2):
+#    user_id = None
+#    if not current_user.is_authenticated:
+#	    user_id = current_user.id
+ #   return Request.create(user_id, image, breed1, breed2)
     
 @app.route('/header/')
 def show_header():
     return render_template('header.html')
 
-@app.route('/signUp/', methods=["GET", "POST"])
-def _signUp():
-    name = request.form['fn']
-    email = request.form['email']
-    password = request.form['password']
-    return signUp.login(name, email, password)
+#@app.route('/signUp/', methods=["GET", "POST"])
+#def _signUp():
+#    name = request.form['fn']
+#   email = request.form['email']
+#    password = request.form['password']
+#    return signUp.login(name, email, password)
 
-@app.route('/signIn/', methods=["GET", "POST"])
-def _signIn():
-    email = request.form['email']
-    password = request.form['password']
-    return signIn.login(email, password)
+#@app.route('/signIn/', methods=["GET", "POST"])
+#def _signIn():
+#    email = request.form['email']
+#   password = request.form['password']
+#    return signIn.login(email, password)
 
-@app.route('/signGoogle')
-def _signGoogle():
-    return googleAuth.login()
+#@app.route('/signGoogle')
+#def _signGoogle():
+#    return googleAuth.login()
 
-@app.route("/signGoogle/callback")
-def callback():
-    return googleAuth.callback()
+#@app.route("/signGoogle/callback")
+#def callback():
+ #   return googleAuth.callback()
+@app.route('/profile/')
+def show_profile():
+     Name1 =["British Shorthair Cat", "Scottish Straight Cat"]
+     Name2 =["British Longhair Cat", "Persian Cat"]
+     PathImg =[url_for('static', filename='css//images/2.jpg'), url_for('static', filename='css//images/3.jpg')]
+     return render_template("profile.html", len = len(PathImg), Name1 = Name1,  Name2 = Name2,  PathImg = PathImg) 
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=4826)

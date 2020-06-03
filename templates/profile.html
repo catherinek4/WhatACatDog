@@ -1,0 +1,101 @@
+<html>
+<head>
+    <title> WhatACatDog </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src='http://muller.fly-studio.com.ua/wp-content/themes/muller/assistant/owl.carousel/owl.carousel.min.js?ver=4.9.4'></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='owl/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='owl/owl/owl.theme.default.min.css') }}">
+    <script src="{{ url_for('static', filename='owl/owl.carousel.min.js')}}"></script>
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+            <div class="header logo"><a href="#"><img src="{{ url_for('static', filename='css//images/logo.png.png') }}"
+                        alt="logo"></a></div>
+            <div class="headwrapper">
+                <div class="header name">
+                    WhatACat?Dog
+                </div>
+                <nav>
+                    <ul class="topmenu">
+                        <li class="hover" style="padding-right: 95px;"><a target="_top" href="{{ url_for('home') }}"
+                                class="hov">HOME
+                                PAGE</a></li>
+                        <li class="hover"><span class=" partition"></span><a target="_top" href="main.html#usage"
+                                class="active hover">HOW TO USE</a></li>
+                        <li class="hover" style="padding-left: 95px"><span class=" partition"></span><a target="_top"
+                                href="main.html#about" class="hov">ABOUT US</a></li>
+                    </ul>
+                </nav>
+            </div>
+        <!-- Тут нужно сделать при нажатии выход из профиля-->
+       <a class="sign" target="_blank"><div class="header logo exit"><img src="{{ url_for('static', filename='css//images/exit.png')}}" style="width: 100px; height: 100px; margin-left: 50px; " alt="profile"></div></a>
+    </div>
+    </header>
+
+
+      <!-- Unnamed (Dynamic Panel) -->
+    <div class="title">Selection of cats and dogs</div>  
+    <div class="background">
+      <div class="owl-carousel owl-theme carousel">
+            <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/4.jpg')}}" alt="Cat"><span class="siber">Siberian Cat</span></div>
+            <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/2.jpg')}}" alt="Cat"><span class="brit">British Shorthair Cat</span></div>
+            <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/3.jpg')}}" alt="Cat"><span class="brit">British Shorthair Cat</span></div>
+            <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/5.jpg')}}" alt="Cat"><span class="scot">Scottish Straight Cat</span></div>
+            <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/11.jpg')}}" alt="Cat"><span class="scot">Scottish Straight Cat</span></div>
+            <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/6.jpg')}}" alt="Dog"><span class="welsh">Welsh Corgi Pembroke</span></div>
+            <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/7.jpg')}}" alt="Cat"><span class="brit">British Shorthair Cat</span></div>
+            <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/9.jpg')}}" alt="Cat"><span class="britlong">British Longhair Cat</span></div>
+            <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/10.jpg')}}" alt="Cat"><span class="brit">British Shorthair Cat</span></div>
+            <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/111.jpg')}}" alt="Dog"><span class="welsh">Welsh Corgi Pembroke</span></div>
+            <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/12.jpg')}}" alt="Cat"><span class="pers">Persian Cat</span></div>
+            <div><img style="width: 300px; height: 300px;" src="{{ url_for('static', filename='css//images/13.jpg')}}" alt="Dog"><span class="hask">Siberian Husky</span></div>
+        </div>
+ <div class="title">History of requests</div>  
+<div class="historyReq">
+    <div class="histName"><span class="catspan">Cats</span><span class="dogspan">Dogs</span></div>
+<div class="overflow cats">
+ <!--Отсюда копировать-->
+ {%for i in range(0, len)%} 
+<div class="part">
+    <img class="histreq" src="{{PathImg[i]}}">
+</div>
+<div class="part">
+    <div class="breed1">{{Name1[i]}}</div>
+    <div class="breed2">{{Name2[i]}}</div>
+</div>
+{%endfor%}
+</div>
+
+<div class="overflow dogs">
+<!--Сюда цикл для собак-->
+<div class="part">
+    <img class="histreq" src="ПЕРЕМЕННАЯ_ПУТЬ_ДЛЯ_СОБАК">
+</div>
+<div class="part">
+    <div class="breed1">ПЕРЕМЕННАЯ_ИМЯ1_ДЛЯ_СОБАК</div>
+    <div class="breed2">ПЕРЕМЕННАЯ_ИМЯ2_ДЛЯ_СОБАК</div>
+</div>
+<!--До сюда -->
+</div>
+
+
+    <script>$(".owl-carousel").owlCarousel({
+nav:true,
+loop:true,
+margin:20,
+nav:true,
+responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },
+                1000:{
+                    items:3
+                }
+            }
+});
+</script>
