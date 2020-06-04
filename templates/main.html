@@ -18,14 +18,14 @@
                     WhatACat?Dog
                 </div>
                 <nav>
-                    <ul class="topmenu">
+                    <ul class="topmenu" id="anch">
                         <li class="hover" style="padding-right: 95px;"><a target="_top" href="{{ url_for('home') }}"
                                 class="hov">HOME
                                 PAGE</a></li>
                         <li class="hover"><span class=" partition"></span><a target="_top" href="main.html#usage"
                                 class="active hover">HOW TO USE</a></li>
                         <li class="hover" style="padding-left: 95px"><span class=" partition"></span><a target="_top"
-                                href="main.html#about" class="hov">ABOUT US</a></li>
+                            href="{{ url_for('home', _anchor='abo') }}" class="hov">ABOUT US</a></li>
                     </ul>
                 </nav>
             </div>
@@ -112,8 +112,8 @@
         <a id='linka' href="">Register</a> <span id='fontik'> to get the best selection of cats and dogs and </span><br> <span id='fontik2'>have access to the history of your requests.</span>
         </div>
         </div></a>
-   
-    <a name="about" style="text-decoration: none;"></a>
+   <div class="abtscroll">
+    <a name="about" id="abo" style="text-decoration: none;"></a>
         <div id="u89">
         <img id="u89_img" class="img " src="../static/css/images/u2.png"/>
         </div>
@@ -167,6 +167,7 @@
             </div>
         </div>
     </div>
+   </div>
 
     <div id='footer'>
         <div style='padding-top: 35px;'>
@@ -415,3 +416,14 @@ function unhover(element) {
         })
     });
 </script>
+<script type="text/javascript">
+    $(document).ready(function(){
+       $("#anch").on("click","a", function (event) {
+           event.preventDefault();
+           var id  = $(this).attr('href'),
+               top = $(id).offset().top;
+           $('body,html').animate({scrollTop: top}, 1000);
+       });
+   });
+   </script>
+   

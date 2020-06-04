@@ -22,10 +22,10 @@
                         <li class="hover" style="padding-right: 95px;"><a target="_top" href="{{ url_for('home') }}"
                                 class="hov">HOME
                                 PAGE</a></li>
-                        <li class="hover"><span class=" partition"></span><a target="_top" href="main.html#usage"
+                        <li class="hover"><span class=" partition"></span><a target="_top" href="{{ url_for('home', _anchor='htu') }}"
                                 class="active hover">HOW TO USE</a></li>
                         <li class="hover" style="padding-left: 95px"><span class=" partition"></span><a target="_top"
-                                href="main.html#about" class="hov">ABOUT US</a></li>
+                            href="{{ url_for('home', _anchor='abo') }}" class="hov">ABOUT US</a></li>
                     </ul>
                 </nav>
             </div>

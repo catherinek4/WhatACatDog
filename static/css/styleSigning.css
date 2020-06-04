@@ -38,12 +38,12 @@ border-radius:30px;
 color:#20B3F2;
 }
 .close-popup{
-width: 25px;
-height: 25px;
-cursor: pointer;
-position:  relative;  
-margin-left: 460px;
-margin-top:  5px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  position:  relative;  
+  margin-left:430px;
+  margin-top:  30px;
 }
 .close-popup:before{
 content:"";
